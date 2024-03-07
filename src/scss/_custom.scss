@@ -1,0 +1,1210 @@
+.pagination a {
+  position: relative;
+  display: block;
+  padding: 0.5rem 0.75rem;
+  margin-left: -1px;
+  line-height: 1.25;
+  color: #007bff;
+  border: 1px solid #dee2e6;
+}
+.pagination {
+  float: right;
+}
+
+.pagination .active {
+  background-color: #20a8d8;
+}
+
+.pagination .active a {
+  color: #fff;
+}
+.pagination .disabled a {
+  color: #6c757d;
+  pointer-events: none;
+  cursor: auto;
+  background-color: #fff;
+  border-color: #dee2e6;
+}
+
+.mitizoverlay {
+  background: #0000000d !important;
+}
+/* .mitizwrapper {
+  position: inherit !important;
+} */
+
+.custome_error > p {
+  color: red;
+}
+.custome_error > input {
+  border-color: #ff0000 !important;
+}
+.field {
+  position: relative;
+}
+.required {
+  position: absolute;
+  right: 7px;
+  top: 12px;
+  color: red;
+  font-size: 10px;
+}
+
+ul.issues {
+  width: 100%;
+  margin-bottom: 10px;
+}
+ul.issues > li {
+  display: inline-block;
+  float: left;
+  width: 50%;
+  padding: 5px;
+}
+
+.issues .custom-control-label {
+  padding-top: 5px;
+}
+
+.button:disabled {
+  color: #887d7d;
+}
+
+.issue-modal .custom-control-label {
+  padding-top: 5px;
+}
+
+.card-body .meta-image {
+  float: left;
+  padding: 0px;
+  margin: 0px 15px;
+  border-radius: 0px !important;
+}
+
+.user-post:last-child .we-comet {
+  border-bottom: 0px;
+}
+
+.post-control {
+  /* display: none; */
+  position: absolute;
+  right: 30px;
+  z-index: 1;
+}
+.user-post:hover .post-control {
+  display: block;
+}
+
+.coment-area .ReactGridGallery {
+  /* margin-left: 62px; */
+  width: 100%;
+}
+.like svg:hover {
+  color: #20a8d8;
+  cursor: pointer;
+}
+.liked svg {
+  color: #20a8d8 !important;
+}
+
+.loader-box {
+  width: 250px;
+  background-color: #cccccc;
+  padding: 20px;
+  border-radius: 5px;
+}
+.loader-txt {
+  line-height: 50px;
+  color: black;
+}
+
+.sidebar {
+  background-color: #1e76bd !important;
+}
+/* .sidebar .nav-link {
+  padding: 0.75rem 0rem;
+} */
+.sidebar .nav-link:hover {
+  color: #fff;
+  background: black;
+}
+.sidebar .nav-link.active {
+  color: black;
+  background: #fff;
+}
+.react-datepicker-wrapper {
+  display: inline !important;
+}
+
+.collapse:nth-last-child(2) .post-border {
+  border-bottom: none;
+}
+.collapse:nth-last-child(1) .post-border-without-commentbox {
+  border-bottom: none;
+}
+
+.react-tagsinput-tag {
+  background-color: #552e7e !important;
+  color: #ffffff !important;
+  border: 1px solid #e6e7e2 !important;
+}
+.react-tagsinput-input {
+  min-width: 200px !important;
+}
+
+footer {
+  z-index: 1 !important;
+}
+
+// Teeth Sprites Loop //
+
+.tooth-image li {
+  list-style-type: none !important;
+  display: inline-block !important;
+  cursor: pointer;
+}
+.tooth-image {
+  width: 458px;
+  padding-left: 0;
+  @media screen and (max-width: 488px) {
+    width: 292px;
+  }
+  $imageSrc: (
+    url("assets/teeth/sprites/1.jpg"),
+    url("assets/teeth/sprites/2.jpg"),
+    url("assets/teeth/sprites/3.jpg"),
+    url("assets/teeth/sprites/4.jpg"),
+    url("assets/teeth/sprites/5.jpg"),
+    url("assets/teeth/sprites/6.jpg"),
+    url("assets/teeth/sprites/7.jpg"),
+    url("assets/teeth/sprites/8.jpg"),
+    url("assets/teeth/sprites/9.jpg"),
+    url("assets/teeth/sprites/10.jpg"),
+    url("assets/teeth/sprites/11.jpg"),
+    url("assets/teeth/sprites/12.jpg"),
+    url("assets/teeth/sprites/13.jpg"),
+    url("assets/teeth/sprites/14.jpg"),
+    url("assets/teeth/sprites/15.jpg"),
+    url("assets/teeth/sprites/16.jpg"),
+    url("assets/teeth/sprites/17.jpg"),
+    url("assets/teeth/sprites/18.jpg"),
+    url("assets/teeth/sprites/19.jpg"),
+    url("assets/teeth/sprites/20.jpg"),
+    url("assets/teeth/sprites/21.jpg"),
+    url("assets/teeth/sprites/22.jpg"),
+    url("assets/teeth/sprites/23.jpg"),
+    url("assets/teeth/sprites/24.jpg"),
+    url("assets/teeth/sprites/25.jpg"),
+    url("assets/teeth/sprites/26.jpg"),
+    url("assets/teeth/sprites/27.jpg"),
+    url("assets/teeth/sprites/28.jpg"),
+    url("assets/teeth/sprites/29.jpg"),
+    url("assets/teeth/sprites/30.jpg"),
+    url("assets/teeth/sprites/31.jpg"),
+    url("assets/teeth/sprites/32.jpg")
+  );
+
+  @for $i from 1 through 32 {
+    li:nth-child(#{$i}) {
+      span {
+        cursor: pointer;
+        background: nth($imageSrc, $i);
+        background-position: left;
+        width: 28px;
+        height: 99px;
+        display: block;
+        @media screen and (max-width: 488px) {
+          width: 16px;
+          background-size: 205% 76%;
+          background-repeat: repeat-x;
+        }
+        &.teeth_1_selected {
+          background-position: 28px center;
+          @media screen and (max-width: 488px) {
+            width: 16px;
+            background-position: 16px center;
+          }
+        }
+        &.teeth_2_default {
+          width: 32px;
+          @media screen and (max-width: 488px) {
+            width: 18px;
+            background-size: 205% 72%;
+            background-repeat: repeat-x;
+          }
+        }
+        &.teeth_2_selected {
+          width: 32px;
+          background-position: 33px center;
+          @media screen and (max-width: 488px) {
+            width: 18px;
+            background-position: 19px center;
+          }
+        }
+        &.teeth_3_default {
+          width: 36px;
+          @media screen and (max-width: 488px) {
+            width: 20px;
+          }
+        }
+        &.teeth_3_selected {
+          width: 36px;
+          background-position: 36px center;
+          @media screen and (max-width: 488px) {
+            width: 20px;
+            background-position: 20px center;
+          }
+        }
+        &.teeth_4_default {
+          width: 24px;
+          @media screen and (max-width: 488px) {
+            width: 18px;
+          }
+        }
+        &.teeth_4_selected {
+          width: 24px;
+          background-position: 25px center;
+          @media screen and (max-width: 488px) {
+            width: 18px;
+            background-position: 19px center;
+          }
+        }
+        &.teeth_5_default {
+          width: 26px;
+          @media screen and (max-width: 488px) {
+            width: 18px;
+            background-size: 205% 76%;
+            background-repeat: repeat-x;
+          }
+        }
+        &.teeth_5_selected {
+          width: 26px;
+          background-position: 26px center;
+          @media screen and (max-width: 488px) {
+            width: 18px;
+            background-position: 19px center;
+          }
+        }
+        &.teeth_6_default {
+          width: 26px;
+          @media screen and (max-width: 488px) {
+            width: 18px;
+          }
+        }
+        &.teeth_6_selected {
+          width: 26px;
+          background-position: 26px center;
+          @media screen and (max-width: 488px) {
+            width: 18px;
+            background-position: 19px center;
+          }
+        }
+        &.teeth_7_default {
+          width: 22px;
+          @media screen and (max-width: 488px) {
+            width: 18px;
+          }
+        }
+        &.teeth_7_selected {
+          width: 22px;
+          background-position: 22px center;
+          @media screen and (max-width: 488px) {
+            width: 18px;
+            background-position: 19px center;
+          }
+        }
+        &.teeth_8_default {
+          width: 32px;
+          @media screen and (max-width: 488px) {
+            width: 19px;
+          }
+        }
+        &.teeth_8_selected {
+          width: 32px;
+          background-position: 34px center;
+          @media screen and (max-width: 488px) {
+            width: 19px;
+            background-position: 20px center;
+          }
+        }
+        &.teeth_9_default {
+          width: 34px;
+          @media screen and (max-width: 488px) {
+            width: 19px;
+          }
+        }
+        &.teeth_9_selected {
+          width: 34px;
+          background-position: 34px center;
+          @media screen and (max-width: 488px) {
+            width: 19px;
+            background-position: 20px center;
+          }
+        }
+        &.teeth_10_default {
+          width: 22px;
+          @media screen and (max-width: 488px) {
+            width: 18px;
+          }
+        }
+        &.teeth_10_selected {
+          width: 22px;
+          background-position: 22px center;
+          @media screen and (max-width: 488px) {
+            width: 18px;
+            background-position: 19px center;
+          }
+        }
+        &.teeth_11_default {
+          width: 25px;
+          @media screen and (max-width: 488px) {
+            width: 18px;
+          }
+        }
+        &.teeth_11_selected {
+          width: 25px;
+          background-position: 26px center;
+          @media screen and (max-width: 488px) {
+            width: 18px;
+            background-position: 19px center;
+          }
+        }
+        &.teeth_12_default {
+          width: 26px;
+          @media screen and (max-width: 488px) {
+            width: 18px;
+          }
+        }
+        &.teeth_12_selected {
+          width: 26px;
+          background-position: 26px center;
+          @media screen and (max-width: 488px) {
+            width: 18px;
+            background-position: 19px center;
+          }
+        }
+        &.teeth_13_default {
+          width: 26px;
+          @media screen and (max-width: 488px) {
+            width: 18px;
+          }
+        }
+        &.teeth_13_selected {
+          width: 26px;
+          background-position: 26px center;
+          @media screen and (max-width: 488px) {
+            width: 18px;
+            background-position: 19px center;
+          }
+        }
+        &.teeth_14_default {
+          width: 35px;
+          @media screen and (max-width: 488px) {
+            width: 20px;
+          }
+        }
+        &.teeth_14_selected {
+          width: 35px;
+          background-position: 36px center;
+          @media screen and (max-width: 488px) {
+            width: 20px;
+            background-position: 21px center;
+          }
+        }
+        &.teeth_15_default {
+          width: 33px;
+          @media screen and (max-width: 488px) {
+            width: 18px;
+          }
+        }
+        &.teeth_15_selected {
+          width: 33px;
+          background-position: 33px center;
+          @media screen and (max-width: 488px) {
+            width: 18px;
+            background-position: 19px center;
+          }
+        }
+        &.teeth_16_default {
+          width: 30px;
+          @media screen and (max-width: 488px) {
+            width: 18px;
+          }
+        }
+        &.teeth_16_selected {
+          width: 30px;
+          background-position: 30px center;
+          @media screen and (max-width: 488px) {
+            width: 18px;
+            background-position: 19px center;
+          }
+        }
+        &.teeth_17_default {
+          width: 32px;
+          @media screen and (max-width: 488px) {
+            width: 18px;
+          }
+        }
+        &.teeth_17_selected {
+          width: 32px;
+          background-position: 32px center;
+          @media screen and (max-width: 488px) {
+            width: 18px;
+            background-position: 19px center;
+          }
+        }
+        &.teeth_18_default {
+          width: 35px;
+          @media screen and (max-width: 488px) {
+            width: 20px;
+          }
+        }
+        &.teeth_18_selected {
+          width: 35px;
+          background-position: 36px center;
+          @media screen and (max-width: 488px) {
+            width: 20px;
+            background-position: 19px center;
+          }
+        }
+        &.teeth_19_default {
+          width: 40px;
+          @media screen and (max-width: 488px) {
+            width: 23px;
+          }
+        }
+        &.teeth_19_selected {
+          width: 40px;
+          background-position: 40px center;
+          @media screen and (max-width: 488px) {
+            width: 23px;
+            background-position: 19px center;
+          }
+        }
+        &.teeth_20_default {
+          width: 28px;
+          @media screen and (max-width: 488px) {
+            width: 16px;
+          }
+        }
+        &.teeth_20_selected {
+          width: 28px;
+          background-position: 28px center;
+          @media screen and (max-width: 488px) {
+            width: 16px;
+            background-position: 19px center;
+          }
+        }
+        &.teeth_21_default {
+          width: 26px;
+          @media screen and (max-width: 488px) {
+            width: 18px;
+          }
+        }
+        &.teeth_21_selected {
+          width: 26px;
+          background-position: 26px center;
+          @media screen and (max-width: 488px) {
+            width: 18px;
+            background-position: 19px center;
+          }
+        }
+        &.teeth_22_default {
+          width: 26px;
+          @media screen and (max-width: 488px) {
+            width: 18px;
+          }
+        }
+        &.teeth_22_selected {
+          width: 26px;
+          background-position: 26px center;
+          @media screen and (max-width: 488px) {
+            width: 18px;
+            background-position: 19px center;
+          }
+        }
+        &.teeth_23_default {
+          width: 23px;
+          @media screen and (max-width: 488px) {
+            width: 18px;
+          }
+        }
+        &.teeth_23_selected {
+          width: 23px;
+          background-position: 23px center;
+          @media screen and (max-width: 488px) {
+            width: 18px;
+            background-position: 19px center;
+          }
+        }
+        &.teeth_24_default {
+          width: 21px;
+          @media screen and (max-width: 488px) {
+            width: 18px;
+          }
+        }
+        &.teeth_24_selected {
+          width: 21px;
+          background-position: 21px center;
+          @media screen and (max-width: 488px) {
+            width: 18px;
+            background-position: 19px center;
+          }
+        }
+        &.teeth_25_default {
+          width: 21px;
+          @media screen and (max-width: 488px) {
+            width: 16px;
+          }
+        }
+        &.teeth_25_selected {
+          width: 21px;
+          background-position: 21px center;
+          @media screen and (max-width: 488px) {
+            width: 16px;
+            background-position: 19px center;
+          }
+        }
+        &.teeth_26_default {
+          width: 22px;
+          @media screen and (max-width: 488px) {
+            width: 16px;
+          }
+        }
+        &.teeth_26_selected {
+          width: 22px;
+          background-position: 23px center;
+          @media screen and (max-width: 488px) {
+            width: 16px;
+            background-position: 19px center;
+          }
+        }
+        &.teeth_27_default {
+          width: 26px;
+          @media screen and (max-width: 488px) {
+            width: 18px;
+          }
+        }
+        &.teeth_27_selected {
+          width: 26px;
+          background-position: 26px center;
+          @media screen and (max-width: 488px) {
+            width: 18px;
+            background-position: 19px center;
+          }
+        }
+        &.teeth_28_default {
+          width: 25px;
+          @media screen and (max-width: 488px) {
+            width: 16px;
+          }
+        }
+        &.teeth_28_selected {
+          width: 25px;
+          background-position: 26px center;
+          @media screen and (max-width: 488px) {
+            width: 16px;
+            background-position: 19px center;
+          }
+        }
+        &.teeth_29_default {
+          width: 27px;
+          @media screen and (max-width: 488px) {
+            width: 16px;
+          }
+        }
+        &.teeth_29_selected {
+          width: 27px;
+          background-position: 28px center;
+          @media screen and (max-width: 488px) {
+            width: 16px;
+            background-position: 19px center;
+          }
+        }
+        &.teeth_30_default {
+          width: 39px;
+          @media screen and (max-width: 488px) {
+            width: 23px;
+          }
+        }
+        &.teeth_30_selected {
+          width: 39px;
+          background-position: 41px center;
+          @media screen and (max-width: 488px) {
+            width: 23px;
+            background-position: 24px center;
+          }
+        }
+        &.teeth_31_default {
+          width: 35px;
+          @media screen and (max-width: 488px) {
+            width: 20px;
+          }
+        }
+        &.teeth_31_selected {
+          width: 35px;
+          background-position: 36px center;
+          @media screen and (max-width: 488px) {
+            width: 20px;
+            background-position: 21px center;
+          }
+        }
+        &.teeth_32_default {
+          width: 32px;
+          @media screen and (max-width: 488px) {
+            width: 18px;
+          }
+        }
+        &.teeth_32_selected {
+          width: 32px;
+          background-position: 33px center;
+          @media screen and (max-width: 488px) {
+            width: 18px;
+            background-position: 19px center;
+          }
+        }
+      }
+    }
+    li {
+      &:nth-child(17),
+      &:nth-child(18),
+      &:nth-child(19),
+      &:nth-child(20),
+      &:nth-child(21),
+      &:nth-child(22),
+      &:nth-child(23),
+      &:nth-child(24),
+      &:nth-child(25),
+      &:nth-child(26),
+      &:nth-child(27),
+      &:nth-child(28),
+      &:nth-child(29),
+      &:nth-child(30),
+      &:nth-child(31),
+      &:nth-child(32),
+      &:nth-child(33) {
+        float: right;
+      }
+    }
+  }
+}
+
+// Teeth Sprites Loop //
+
+.step {
+  list-style: none;
+  margin: 0.2rem 0;
+  width: 100%;
+}
+
+.step .step-item {
+  flex: 1 1;
+  margin-top: 0;
+  min-height: 1rem;
+  position: relative;
+  text-align: center;
+}
+
+.step .step-item span:before {
+  background: #e9384f;
+  border-radius: 50%;
+  content: "";
+  display: block;
+  height: 1.8rem;
+  left: 50%;
+  position: absolute;
+  top: -0.3rem;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  width: 1.8rem;
+  z-index: 1;
+}
+
+.step .step-item:not(:first-child):before {
+  background: #e9384f;
+  content: "";
+  height: 2px;
+  left: -50%;
+  position: absolute;
+  top: 9px;
+  width: 100%;
+}
+
+.step .step-item.active ~ .step-item a:before,
+.step .step-item.active ~ .step-item span:before {
+  background: #c5c5c5;
+}
+.was-validated .form-control:invalid,
+.form-control.is-invalid {
+  background-image: none;
+}
+.whiteoverlay {
+  background: #e6dbdb0d !important;
+}
+
+.select-lg .css-yk16xz-control {
+  padding: 3px !important;
+}
+
+.select-lg .css-1pahdxg-control {
+  padding: 3px !important;
+}
+
+.rbc-allday-cell .rbc-row-content {
+  display: none !important;
+}
+
+.rbc-events-container .rbc-event {
+  height: 0 !important;
+}
+
+.link-without-underline {
+  text-decoration: none !important;
+}
+
+.react-dropdown-tree-select .dropdown {
+  width: 100%;
+}
+.react-dropdown-tree-select .dropdown-content {
+  width: 100%;
+  overflow-y: scroll;
+  height: 300px;
+}
+.react-dropdown-tree-select .dropdown-trigger {
+  width: 100%;
+}
+.react-dropdown-tree-select .search {
+  border-bottom: none !important;
+}
+.react-dropdown-tree-select .dropdown .dropdown-trigger.arrow.top:after {
+  content: none !important;
+}
+.react-dropdown-tree-select .dropdown .dropdown-trigger.arrow.bottom:after {
+  content: none !important;
+}
+/*Slots component style start*/
+/*.label-text {
+  position: relative;
+  margin: 15px 0 20px;
+  color: #b7c9cc;
+  text-align: center;
+}
+
+.label-text:before {
+  position: absolute;
+  border-top: 1px solid #b7c9cc;
+  top: 50%;
+  left: 0;
+  margin-top: -0.5px;
+  width: 100%;
+  content: "";
+}
+
+.line-style {
+  margin-left: 5px !important;
+  margin-right: 5px !important;
+}
+
+.span-text {
+  position: relative;
+  display: inline-block;
+  padding: 0 30px;
+  background: #fff;
+}*/
+.rbc-allday-cell {
+  height: 0 !important;
+}
+.rbc-events-container .rbc-event {
+  height: auto !important;
+}
+/*Slots component style end*/
+.form-control-lg {
+  font-size: 0.875rem !important;
+}
+.change-border {
+  display: block;
+  width: 100%;
+  height: calc(1.5em + 0.75rem + 2px);
+  padding: 0.375rem 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #5c6873;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #f86c6b;
+  border-radius: 0.25rem;
+}
+
+.change-select-border {
+  border: 1px #f86c6b;
+  border-radius: 4px;
+}
+/*sorting starts*/
+.sortable {
+  background-image: url("assets/images/sortable.gif");
+  background-repeat: no-repeat;
+  background-position: center left;
+  padding-left: 17px !important;
+  color: #20a8d8;
+  cursor: pointer;
+}
+.asc {
+  background-image: url("assets/images/asc.gif");
+  background-repeat: no-repeat;
+  background-position: center left;
+  padding-left: 17px !important;
+  color: #20a8d8;
+  cursor: pointer;
+}
+.desc {
+  background-image: url("assets/images/desc.gif");
+  background-repeat: no-repeat;
+  background-position: center left;
+  padding-left: 17px !important;
+  color: #20a8d8;
+  cursor: pointer;
+}
+/*sorting ends*/
+/* checkAll box style starts */
+.cform-check-input {
+  position: static !important;
+}
+/* checkAll box style ends */
+/*Scheduler style starts*/
+.rbc-current-time-indicator {
+  background-color: #fff !important;
+}
+div[type*="popup"]
+  > .rbc-addons-dnd-resizable
+  > .rbc-event-content
+  > span
+  > small {
+  position: static !important;
+  padding: 10px !important;
+}
+
+/*Scheduler style ends*/
+
+/*Add Note style starts*/
+.notes {
+  min-height: 150px;
+  max-height: 300px;
+  overflow-y: auto;
+  width: 100%;
+}
+/*Add Note style ends*/
+
+.input-group span .svg-inline--fa {
+  font-size: initial !important;
+}
+
+.sidebar .nav-dropdown.open .nav-link.active {
+  color: black;
+}
+
+.input-bg {
+  height: 42px;
+}
+
+.react-confirm-alert-overlay {
+  z-index: 1051 !important;
+}
+
+.hoverPointer {
+  cursor: pointer;
+}
+input {
+  outline: 0;
+  border-width: 0 0 2px;
+  border-color: black;
+}
+
+.letter {
+  border: 1px solid gray;
+}
+.box {
+  padding: 40px;
+  line-height: 7px;
+}
+.print_buttons {
+  padding: 10px;
+  margin: 10px;
+}
+.print_img {
+  margin-bottom: 35px;
+}
+.font-design {
+  & h2,
+  h3 {
+    font-family: Georgia;
+  }
+}
+.box {
+  & p {
+    color: black;
+    font-size: 22px;
+    font-family: Yaldevi, sans-serif;
+  }
+}
+.font-design {
+  & h2 {
+    color: black;
+    font-size: 26px;
+  }
+}
+
+.caseStatus-0 {
+  background-color: #1eb653;
+  font-weight: 500;
+}
+
+.caseStatus-1 {
+  background-color: #faea12;
+  font-weight: 500;
+  color: black;
+}
+.caseStatus-2 {
+  background-color: #e83e8c;
+  font-weight: 500;
+}
+.caseStatus-3 {
+  background-color: #3254eb;
+  font-weight: 500;
+}
+.caseStatus-4 {
+  background-color: #ca0cdb;
+  font-weight: 500;
+}
+.caseStatus-5 {
+  background-color: #c14018;
+  font-weight: 500;
+}
+.caseStatus-6 {
+  background-color: #0fbd99;
+  font-weight: 500;
+}
+.caseStatus-7 {
+  background-color: #2f353a;
+  font-weight: 500;
+}
+.caseStatus-8 {
+  background-color: #026112;
+  font-weight: 500;
+}
+.caseStatus-9 {
+  background-color: #da0704;
+  font-weight: 500;
+}
+.caseStatus-10 {
+  background-color: #808080;
+  font-weight: 500;
+}
+
+.no-appointment {
+  background-color: #eee;
+}
+
+.shadow-badge {
+  box-shadow: 0 0 5px 5px #ccc;
+}
+
+/* card alingment */
+@media (min-width: 576px) {
+  .card-columns {
+    -webkit-column-count: 2;
+    column-count: 2;
+    grid-column-gap: 1.25rem;
+    -webkit-column-gap: 1.25rem;
+    column-gap: 1.25rem;
+    orphans: 1;
+    widows: 1;
+  }
+  .card-img-top {
+    height: 300px;
+    width: 300px;
+    margin: auto;
+    display: flex;
+    border-radius: 50%;
+  }
+}
+.card-img-top {
+  border-radius: 50%;
+}
+/* card alingment */
+.tab-content .tab-pane {
+  padding: 0.5rem;
+}
+.custom-location-style {
+  padding: 15px !important;
+}
+.main {
+  .container-fluid {
+    @media (max-width: 767px) {
+      padding: 0 15px;
+    }
+  }
+}
+
+.app {
+  &.admin {
+    .app-header {
+      .navbar-brand {
+        @media (max-width: 480px) {
+          right: 24px;
+          left: inherit;
+        }
+      }
+      .btn-success {
+        @media (max-width: 590px) {
+          margin-left: 0 !important;
+        }
+      }
+    }
+  }
+}
+
+.cases-edit-marking {
+  font-size: size(22);
+  margin-top: size(35);
+  .form-check-input {
+    position: relative;
+    top: size(-2);
+  }
+  @media (max-width: 1024px) {
+    margin-top: size(58);
+  }
+  @media (max-width: 767px) {
+    font-size: size(20);
+    margin-top: size(0);
+    margin-bottom: size(15);
+  }
+}
+
+/* Responsive table css */
+.responsive-table-alignment {
+  & thead {
+    th {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+}
+.cases-edit {
+  padding: size(2) size(4);
+  height: max-content;
+  margin-left: size(4);
+  position: relative;
+  top: size(4);
+}
+
+@media print {
+  .recipt-payment{
+    font-size: 30px;
+  }
+  .imgdent-logo{
+    height: 50px;
+  }
+}
+
+
+// @media print {
+//   .printinvoicefont {
+//     p {
+//       font-size: 22px;
+//       margin-top: 5px;
+//     }
+//     th {
+//       font-size: 22px;
+//       margin-top: 5px;
+//     }
+//     td {
+//       font-size: 22px;
+//     }
+//     .invoice {
+//       font-size: 35px;
+//     }
+//     .reciept {
+//       font-size: 35px;
+//     }
+//     .fontbig {
+//       font-size: 25px;
+//       line-height: 2.5rem;
+//       margin-top: 5px;
+//     }
+//     .fontsmall {
+//       font-size: 20px;
+//     }
+//     .fontmedium{
+//       font-size: 22px;
+//     }
+//     .serviceName{
+//       font-size: 30px;
+//       color: black;
+//     }
+
+//     .address {
+//       width: 280px;
+//       position: relative;
+//       left: 450px;
+//       bottom: 45px;
+//     }
+//     .date {
+//       position: relative;
+//       bottom: 15px;
+//     }
+   
+//     // .signature{
+//     //   margin-bottom: 145px;
+//     // }
+//   }
+//   @page {
+//         margin-top: 0;
+//         margin-bottom: 0;
+//     }
+//     body {
+//         padding-top: 72px;
+//         padding-bottom: 72px ;
+//     }
+// }
+
+.font-size {
+  font-size: 20px;
+}
+
+.Payments-Due-pay-btn {
+  margin-left: 220px;
+  margin-top: 15px !important;
+}
+.sidebar .nav-link .nav-icon {
+  color: #ffffff;
+}
+
+.paymentprint th {
+  border: 1px solid black;
+}
+.serviceprint th {
+  border: 1px solid black;
+}
+.servicecomplete th {
+  border: 1px solid black;
+}
+.printinvoicetext {
+  color: black;
+}
+.printReciept {
+  color: black;
+}
+.card-height {
+  min-height: 250;
+  max-height: 250;
+}
+.break {
+  word-break: break-word;
+}
+span.smsconsent.input-group-text {
+  border-radius: 0;
+}
+span.emailconsent.input-group-text {
+  border-radius: 0;
+}

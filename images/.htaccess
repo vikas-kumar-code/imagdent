@@ -1,0 +1,3 @@
+<Files ~ "\.(jpg|jpeg|png|gif|pdf|txt|bmp)$">
+   allow from all
+</Files>

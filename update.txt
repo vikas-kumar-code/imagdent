@@ -1,0 +1,1469 @@
+Update:
+
+
+1. Created a last step to display all chosen information to let user confirm. 
+
+2. Link Patient Name with Patient Details in Case Create module Confirm Details page(step-8).
+
+3. Added Parent Service field with the suggested service names in AddEdit Service page.
+
+4. Modified the step to add teeth selection and notes field where diagonisis code is chosen.
+
+5. Changed the functionality the choose diagonisis code. 
+
+6. Integrated the functionality to let user choose the option to decide who will pay doctor or patient. 
+
+7. Displayed the selected services on confirmation page. 
+
+8. Modified the script to get all users in dropdown in second step. 
+
+9. Created an api to create case. 
+
+10. Implemented the above API for create case functoinality. 
+
+11. Created an API to get all cases from the database. 
+
+12. Implemented the above api on list case page. 
+
+13. Integrated the functionality to sort cases by location, patient name, clinic, price, doctor and appointment date. 
+
+14. Created an API to search case by clinic, location, doctor and patient name. 
+
+15. Implemented the above api on list case page. 
+
+16. Created an API to get clinics, users and locations and displayed them let user choose or search to search case. 
+
+17. Added the script to show the booked slot for the selected appointment date. 
+
+18. Added the functionality to search services it's parent service on list services page. 
+
+
+1 January 2021
+
+1. Created an API to get the case details to edit case. 
+
+2. Implemented the above API to edit case. 
+
+3. Added the script to fill the create case form. 
+
+4. Added the script to show the selected patient in edit case mode. 
+
+5. Integrated the script to redirect page to list cases page when case is added and updated. 
+
+6. 
+
+
+7 Jan 2021
+1. Near the choose diagonosis code (For insurace reimbursment).
+2. Add lable for choose teeth(Choose area of interest)
+3. Time slot will depend on selected services. 
+4. Case will have the status
+
+15 Jan 2021
+1.Modified CaseDetails page Layout.
+2.Added Basic details of the selected Case on the left side of the Case Details Page.
+3.Created a new TabPanel on the right side of the Case Details Page including Tabs - Documents,Procedure Information,Case Activity,Partners,Notes,Charges.
+3(a).Documents Tab - 
+(i).Integrated functionality to upload Documents for the selected Case.
+(ii).Integrated functionality to Save/Delete the Documents.
+(iii).Created APIs to manage the Documents.
+(iv).Updated Documents table in Database to save Documents.
+3(b).Procedure Information Tab- Showing informations like caseId,Doctor,Case Partners,Selected Procedures,Selected Diagnostic Codes,Selected Teeth,Referral From Notes related to the Selected Case.
+3(c).Partners Tab - 
+(i).Initially it shows the Doctor for whom the case has been created.
+(ii).Integrated Add Partner functionality to let the User to Add More Partners to the Case.
+(iii).Created APIs to Manage the Partners.
+(iv).Created a new Table in Database to store the Partner Details.
+3(d).Charges Tab -
+(i).Showing Doctor PayList and Patient PayList separately along with Doctor Total Bill and Patient Total Bill.
+(ii).Each Service has 4 Options - Add Discount,Delete,Change Payee,Receive Payment.
+(iii).Hide Clinic if Payee is a Patient.
+(iv).Integrated functionality to allow User to change Payee and Clinic (In case if payee is a Doctor).
+8.Showing Doctor Total Bill,Patient Total Bill separately in Add/Edit Case confirmation Page (step-8).
+9.Auto fill Doctor field and skip step-2 in case if loggedIn User is a  Doctor in Add/Edit Case Page.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1. Add NPI Number for location
+2. Change Publish Name to Published Name on location listing page. Also correct the value for the published name. Currently, Legel name is being displayed in place of Published Name.
+3. All location price should be active bydefault.
+4. Move on/off controll before published name and also remove the active inactive badge. 
+5. Create new module Clinics. Just copy and paste the dental tracks code for clinic section. This module will only have the add, edit and delete clinic. Remove manage location functionality from the existing code. 
+6. Change add-edit user functionality like we did for add/edit patient section in dentaltracks. There would be following 4 tabs on add/edit user page:
+a).Basic details(Will have the current filds along with (Physical address with country, city, state),(Billing address with country, city, state), (Mailing address with country, city, state) 
+b). Patients
+c). Finansical history
+d). Documents(Just copy and paste the current functionality available in dentaltracks under add-edit patient section).
+7. Change Set locationn price button to Location settings on list services page. 
+8. Check pagination in all listing page. Specially in services page as client told me that he added so many services. 
+9. Add Pagination control in top of listing also. 
+10. Add dropdown for number of rows near pagination controll. 
+
+
+
+11. Name would same as dental tracks. 
+12. Notes for the users. it will be managed with a seprate tabls like manage document. 
+13. manage documents will be for clinics as well. Also clinic will have a note tab as well.  
+14. Add and edit will be there for notes in clinics and users
+15. Add clinic controll for user section with searh option 
+
+
+19th November 2020
+*. Add enable all control in location settings
+*. Change name for clinic to Business name for all rest of the fields
+*. Dr, Mrs, Mr and for clinic and patitnet and user as well
+*. As soon as user choose External then show alter with the message (This note will be visible to other user.)
+*. Add two check boxes for billing address and mailing address.
+*. InivisAlign ID field for user.
+*. Remove Fax from the patient.
+*. Use other as dropdown you can choose other and Fax.
+*. Add age field and fill it when dob is chosen. 
+*. Emtergency/Gurdian for all fields for emergency fields for patient
+*. Preferred language(English and Spanish) field for patient
+*. Add a seprate module to mange Language.
+*. MRN number for patient
+
+
+30th Nov 20202
+
+* Add the functionality to change location through the popup near the logout box. 
+
+* Add enable and disalble all control in location settings.
+
+* Save location_id for patient. 
+
+* Delete diagonosis code is not working. 
+
+* Configure Pagination  for diagonosis code listing page. 
+
+* Add sorting for diagonosis code listing by name. 
+
+* Add sub menu in front end.
+
+* Remove login link in top navigation and add about us
+
+
+3 Dec 2020
+*. Display role in contact list instead of email. - Done
+*. Link email to send message in the popup. - Done
+*. Add a custom popup for an alert.(It will be visible to all users.) - Done
+* Arrange the user fields to move all important information on top. - Done
+*. Add specialization field for the user(List will be shared in email) - List yet to be shared
+* Change the icon for the patient in left menu. 
+*. Display pagination in diagonosis code on top. - Done
+* Add sorting for the code as well for diagonisis code listing. - Done
+* Add email address for the patient and link the email to send email by default email application. - Done
+* Remove Contract balance - Done
+* Remove solution. - Done
+* Add suffix for the patient -  Done
+* Move MRN number on top in add, edit and patient details page. - Not done yet. 
+*. Change Responsible Pary to dropdown. - Done
+* Move dob up - Done
+*. Address will be in bottom. 
+*. Change label for phone to primaryb and secondary phone - Done
+* Remove extension for the phone numbers - Done
+*. Remove Responsible party status field. - Done
+* There is no any relation of patient to the location. Patient will be accessible for all locations. - Done
+* Remove location field from add and edit patient. - Done
+* Display patient name and it's MRN number on top so that it can be visible all the time for all the tabs. Make the same change for clinic and users as well. - Done
+* Remove recall related fields from add and edit patient. - Done
+* Add Note section for patient also. - Done
+
+
+Create case findings: 
+
+Step 1
+1. Choose location
+2. choose doctor
+3. choose clinic
+Step - 2
+1. Search patient=>select patient=>display patient with fields with a button to update the record if use wish to update.
+
+Step - 3
+1. Choose services with search option
+2. Choose diagonis code
+3. Choose teeth numbers with the help of image. 
+4. Note
+Step - 4
+1. Choose Appointment Date
+2. Urgent and arrange call back like dental tracks. 
+3. Choose slot(After integrating the timeslot module)
+Step - 5
+Confirmation page with schedule button. 
+
+
+1. Addd Maxico in country everywhere. 
+
+
+1. Add checkboxes for doctor pay and patient pay
+
+
+1. Choose imagedent location. 
+2. Change locations as Imaging Centers
+3. Clinics will be as the place from where doctors sends the patientes. 
+4. At the time of adding the user all lcoations should be auto selected. 
+5. User will be able to see all related clinics in their settings. 
+6. Few diagonis code should be check bydefault
+7. Add search box for diagnosis codes and user can add multiple codoes. 
+8. Timeslot will be based on services.
+9. On confirmation page, prices will be listed with doctor pay and patient pay
+10. Add the print option to print confirmation page. 
+11. Add the option to link doctor to see the doctor's details in popup.  
+12. Send email notification to patient and doctoors. 
+13. notification settings for users.
+
+
+
+Location_id-
+
+
+1. Display total amount paid by patient and doctor in bottom.
+2. patient name and clinic name should be displayed in top of case details page. 
+3. Add clinical history for the patient and add the functinoality to open all cases for the patient. 
+4. Generate appointment confirmation to send to the patient. Also generate pdf for the same.
+5. Send email notification to all case members once case is completed.  
+6. Add manage email template
+7. Send email notificatin to all team members when case is created and updated. 
+8. Add signature of the user 
+9. Form builder in admin panel. 
+10. Dashboard, display today's patient with checkin option. 
+
+
+
+14th January
+1. Notes section is clear. 
+
+2. Case activity is also clear in which we will have to add note for multiple times. 
+
+3. User can delete their own note for the case. 
+
+4. Add delete option for the services which will be accessible by the admin only on caes details page. 
+
+5. discount can be added and updated for the case. 
+
+6. In change payee functionality, once patient is chosen then clinic field will be hidden. 
+
+7. Add the option to enter email address to let user connect with the case by registering in add parterner functionalty 
+
+8. make the doctor name clickable everywhere to send email. 
+
+9. Servivces can be added on case details page also. 
+
+
+
+1. Manage note
+2. Delete Note. 
+3. List all notes. 
+4. manage parterns
+5. Add partner. 
+6. Updated the list of pertners. 
+7. 
+
+
+1. Add a text box in partner box to enter email address. 
+2. Add new tab "" on case details page 
+
+1. Case files.(Document types will be shared.)
+2. Rename procedure information to Case Information
+3. Documents
+Rest will be as it is. 
+
+
+Case information
+Case files(document types will be shared)
+Case Activities
+Case parterns.
+Case notes
+Case charges
+Case documentes
+
+On patient details page, there will be a new case tab where all cases will be listed related to the patient. 
+Send receive Emails.
+Check empty reason while adding and updating the discount. 
+Add button for the transaction to print receipt. 
+Form builder for patient
+
+
+2D Xray
+CBCT
+Radiology Report
+Invivo files
+
+28 Jan 2021
+1. Replace Invivo files to DICOM in case files document types.
+2. Add Digital Impressions in document types of case files.
+3. Replace 2D Xray to Panoramic Xray in document types of case files. 
+4. Add Cephalometric Xray in document list of case files. 
+5. Add Extraoral Photos in document list of case files. 
+6. Add Additional Reports in document list of case files. 
+
+*. Add an alter to let user be sure while uploading Dicom files as zip. (Must be a zip file to upload.).
+*. Change sequence in basic details: 
+Patient name
+Doctor
+Appointment(Day Month Date, Year at Time)
+Time
+Clinic
+Change Location to Imaging Center
+
+* In basic details change time to Appointment Time: 
+*. Main doctor should be listed in parter list. 
+*. In parter list just display serial number instead of doctor id. 
+*. Add log in case activity while sending email to doctor. 
+*. Add the functionality to print out the activities.
+
+Option for the case documents: 
+1. Sign-in form
+2. HIPAA 
+3. Questionier 
+4. Other
+
+*. At the time of creating the case remove diagonosis code required 
+*. Add checkbox on choose appoitment page (Appointment is not required.)
+*. Add Arrange call back checkbox on choose appointment step. 
+
+5th Feb,2021
+1.Added log in Case Activity while sending email to Doctor.
+2.Created Messages module.
+3.Compose message functionality added.
+4.Created Inbox,Sent,Trash message folders.
+5.Added Refresh button in Inbox message list.
+6.Showing total number of messages in Inbox.
+7.Integrated Delete All functionality for Inbox and Sent messages.
+8.Upon selecting a message it redirects to message details page.
+9.Message details page has Delete and Reply option.
+10.Created APIs to manage all the above functionalities in Messages module.
+
+
+1. Print option will be for perticular user role. 
+2. Add the subject while sending the message to the user at the time of sending it from case details. 
+3. Move uplaod file below the subject.
+4. If try to uplaod more than 10 files then system will force to upload them as zip.
+5. Integrate the functionality to create new patient at the time of creating the case and flow will be continued. 
+6. At the time of creating the case search criterias will be carreid forward to the create patient page. 
+7. Add the option to list opened cases and completed case
+8. First step Patient Checkin, Upload Patient Paper work, Accept Payment, Capture records, Upload re-formated files, Deliver Case
+Once email is sent then "Case has been completed. Please download your files for your records." 
+
+
+
+
+11 Feb 2021
+1. Filip the label Choose appointment date or arrange a callback
+2. Make the calendar visible to let user understand.
+3. List the cases related to default location on list cases.
+4. Add one more field to enter check number if payment mothod is check. 
+5. Add one option Manual to acceept the payment. 
+6. Add First name and last name in add partner popup. 
+7. Make an entry in activity while chanding the status of case. 
+
+
+1. Add role with the user's first name last name, email address and role while adding the parter for the case. 
+When sms will be sent:  
+1. Appointment scheduled=> Send sms to Patient
+
+When email notification: 
+1. Appointment scheduled => patient, doctor.
+2. When case is completed => doctor(all case parterner). 
+3. Cancel the appointment => patient and doctor(all case parter)
+
+
+* Cancel the apointment with reason
+
+
+
+1. Display patient name in payment deatils page on dashboard page. - Done
+2. Display patient checked in date between patient name and amount.  - Done
+3. List due amount when case's status is 5(Deliver case) on dashboard page.  - Done
+4. Generate invoice and have the option to print it out on list due payment on dashboard page. 
+5. There will be a separate page where all the transactions will be listed.
+6. Transaction can be be exported 
+7. Add a single pay button for all the cases with the help of checkboxes.  - Done
+8. Change Due payments to Payments Due - Done
+9. Display total amount due in bottom of due payment box.  - Done
+10. Month Date, Year for appointment date on list case page. 
+11. Send email notification (internal and external) when case is completed after clicking on Deliver case button. 
+ 
+
+
+4005550000000019
+12/29	
+999
+
+
+1. What to do with the form data?
+2. How it will be used to charge the card?
+3. How our server will be notified once card is successfully charged? Is there any feature of IPN with this gateway?
+4. Is there any option to charge card in future for recurring payment? If yes then how?
+5. Is tokenpay.js best option to accept payment through card?
+
+
+https://www.dropbox.com/s/8wh7sto3t6fkpa8/TokenPayPlainJsTest.Style-tests-dave%20test-RHUAT.html?dl=0
+
+
+https://www.bridgepaynetsecuretest.com/PaymentService/RequestHandler.svc
+
+
+
+
+dhaas to Everyone (10:45 PM)
+https://www.bridgepaynetsecuretest.com/PaymentService/RequestHandler.svc
+https://bridgepaynetwork.force.com/is/s/article/Using-Postman-with-BridgeComm
+dhaas to Everyone (10:50 PM)
+https://bridgepaynetwork.force.com/is/s/article/Bridgecomm1
+dhaas to Everyone (11:05 PM)
+https://rhuat.bridgepaynetsecuretest.com/PaymentService/RequestHandler.svc
+
+
+
+BridgeCommResponse Object
+(
+    [BridgeCommResponseType] => ErrorResponse
+    [TransactionID] => 17800220190919093402
+    [RequestType] => 004
+    [ResponseCode] => 10028
+    [ResponseDescription] => Invalid Amount Non Numeric
+    [responseMessage] => 
+)
+
+
+
+1. Add date range to search cases on list case page. - Done
+2. Add status column in list case page. - Done
+3. Add status controll to search case by status. - Done
+4. Remove delete option from list case page. - Done
+5. Reschedule option need to be on case details page. - Done
+6. Location module will be Imaging Centers. 
+7. Clinics module will be Dental Offices
+8. manage parent servies module - Done
+9. Add new box to show total amount to be paid for location
+10. Send email as meeting to patient when patient is scheduled for an appointment.
+11. Changed the date format of appointment date on list case page. - Done
+12. Add billing address for location. 
+Legal Name
+Country
+State
+Street Address
+City
+Zipcode
+Email
+Fax
+Billing Location Phone
+
+
+
+Update: 
+1. 
+2.  
+3.  
+4.  
+5. 
+6. 
+7.  
+8. 
+9. 
+10. 
+11. 
+12. 
+13.  
+14.  
+15.  
+16. 
+17. 
+18.  
+19.  
+20. 
+21. 
+22.  
+23.  
+24. 
+25.  
+26.  
+27. 
+28. 
+29.  
+30.  
+
+
+
+
+
+
+$transactions['Transactions'] = (array)$response->responseMessage;
+                        $transactions['Transactions']['TransactionID'] = $response->TransactionID;
+                        $transactions['Transactions']['RequestType'] = $response->RequestType;
+                        $transactions['Transactions']['ResponseCode'] = $response->ResponseCode;
+                        $transactions['Transactions']['ResponseDescription'] = $response->ResponseDescription;
+
+BridgeCommResponse Object
+(
+    [BridgeCommResponseType] => Auth
+    [TransactionID] => 446115
+    [RequestType] => 004
+    [ResponseCode] => 00000
+    [ResponseDescription] => Successful Request
+    [responseMessage] => ResponseMessage Object
+        (
+            [Token] => 1000000010261111
+            [Algorithm] => 
+            [CreateDate] => 
+            [ID] => 
+            [KeySize] => 
+            [publicKey] => 
+            [AuthorizationCode] => 597183
+            [ReferenceNumber] => 
+            [GatewayResult] => 00000
+            [AuthorizedAmount] => 690
+            [OriginalAmount] => 690
+            [ExpirationDate] => 1229
+            [AVSResult] => 40
+            [AVSMessage] => Address not available (Address not verified)
+            [StreetMatchMessage] => 
+            [ZipMatchMessage] => 
+            [CVResult] => M
+            [CVMessage] => Matches
+            [IsCommercialCard] => False
+            [GatewayTransID] => 326964001
+            [GatewayMessage] => A01 - Approved
+            [InternalMessage] => Approved: 597183 (approval code)
+            [Balance] => 
+            [CashBackAmount] => 
+            [TransactionCode] => 446115
+            [TransactionDate] => 20210324
+            [CardClass] => Credit
+            [CardType] => Visa
+            [CardModifier] => None
+            [CardHolderName] => 
+            [ProviderResponseCode] => 
+            [ProviderResponseMessage] => Approved
+            [RemainingAmount] => 0
+            [IsoCountryCode] => 840
+            [IsoCurrencyCode] => USD
+            [IsoTransactionDate] => 2021-03-24 09:11:33.687
+            [IsoRequestDate] => 2021-03-24 09:11:33.687
+            [NetworkReferenceNumber] => 326964001
+            [NetworkMerchantId] => 8893001
+            [NetworkTerminalId] => 10001
+            [MaskedPan] => 
+            [WalletID] => 
+            [WalletPaymentMethodID] => 
+            [WalletResponseMessage] => 
+            [WalletResponseCode] => 
+            [ResponseTypeDescription] => 
+            [MerchantCategoryCode] => 5999
+            [ReceiptTagData] => 
+            [IssuerTagData] => 
+            [CardIdentifier] => 
+            [SecondsRemaining] => 
+            [MerchantCode] => 
+            [MerchantAccountCode] => 
+            [MerchantName] => 
+            [GatewayResults] => 
+            [ResponseType] => 
+            [TransactionType] => 
+            [AuthrorizationCode] => 
+            [ProviderAVSCode] => 
+            [ProviderCVCode] => 
+            [ProviderReferenceNumber] => 
+            [CycleCode] => 
+            [RoutingNumber] => 
+            [PurchaseToken] => 
+            [ApprovalCode] => 
+            [CSCResponseCode] => 
+            [GatewayTransId] => 
+            [HolderName] => 
+            [InvoiceNum] => 
+            [TransactionCategory] => 
+            [Amount] => 
+            [AVSResponseCode] => 
+            [Email] => 
+            [Holdertype] => 
+            [AccountType] => 
+            [City] => 
+            [Memo] => 
+            [Phone] => 
+            [AccountNumberMasked] => 
+            [CountryCode] => 
+            [State] => 
+            [Street] => 
+            [TransactionIndustryType] => 
+            [ZipCode] => 
+            [PersistedData] => 
+            [ResponseCode] => 
+            [ResponseDescription] => 
+            [BatchID] => 
+            [AuthenticationTokenId] => 
+            [ServiceFeeResult] => 
+        )
+
+)
+
+
+30 April 2021
+1. Clock in and clock out for all roles. And it can be on and off.
+2. Add flag for cases.
+3. Invoice will be created to send it to the doctor
+4. End of the day Finansical report for each center. 
+5. Total collection my services
+6. Top ten cases by amount and number of cases. 
+7. Day Sheet
+
+
+mitiztech@outlook.com
+mitizhr@outlook.com
+
+
+
+
+
+
+1. Cancel appointment near Re-schedule
+2. First step Patient Checkin, Upload Patient Paper work, Accept Payment, Capture records, Ready for Radiologist(Skip), Rad Report Completed(Skip), Upload re-formated files, Deliver Case 
+3. Add billing address for location - Done
+4. Change the date format (Month, day and year) everywhere - Done
+5. Add invoie id text box to search record. - done
+
+
+2 May test result
+
+
+1=>Patient Checkin,2=>Upload Patient Paper work,3=>Accept Payment,4=>Capture records,5=>Ready for Radiologist,6=>Rad Report Completed,7=>Upload re-formated files,8=>Deliver Case
+
+22 April: 
+1. No appointment needed(For Radiology report or conversions only) - Need to add at the place of Arrange callback. 
+2. Move Arrange callback under the appointment date
+3. Monday, April 26, 2021 at 5:30AM
+
+
+1=>Patient Checkin,2=>Upload Patient Paper work,3=>Accept Payment,4=>Capture records,5=>Ready for Radiologist,6=>Rad Report Completed,7=>Upload re-formated files,8=>Deliver Case,9=>Canceled
+
+
+
+6th May
+1. Link caseId to case details page. - done
+2. Display patient name and doctor name on end of day report. 
+3. make the font size bigger as much as possible. 
+4. Add invoice ID for Doctor, patient A/R and A/R collected
+5. Same layout for A/R collected
+
+
+
+1. Mentis URL
+2. Mentis username and password. 
+3. 
+
+Hoisting
+Shallow comparison
+Higher Order Functions
+currying in JavaScript
+
+
+1. Make the top line wider of services
+2. and make the patient and doctor row bold
+3. Send email notification to all team members of the case when appointment is canceled. 
+4. Send email noticaiton to all team members when appoint is re-scheduled. 
+5. Cross check the scheduler if canceliing apointment and rescheduling appointment is reflecting the scheduler or not. 
+6. Remove new patient and existing patient report
+7. Change label of List of returning patient to List of existing patients.
+Note: 
+
+8. New patient will be those patient who have been seen withing 30 days. 
+
+
+1. aayushi/imagdent@123# - Technologist		
+2. 	
+
+
+Add sms content for email template
+1. sent notification to email when reply came(report@return.me)
+
+
+https://zoom.us/j/97143363373?pwd=UEgvVjNVTktKbGRqOXRYWmJWQkN0Zz09
+
+
+
+1. Remove re-scheduled report from non financial report. - Done
+2. Almost same columns which is on list cases page needed on canceled appointment report. - Done
+3. If any user does not create any case from last one year then those users will be treated as inactive users in repots. 
+4. Production report details will be shared y Aaushishi
+5. Add preferred Name for patient and user to save in database. 
+
+
+Credit card report: 
+Refer the online transaction report 
+
+Log-in report will be discussed with Arun
+
+Production report: 
+1. Service Code
+2. Service Name
+3. Fee
+3. Count(It will be total number of services sold to the patients)
+4. Total Fees
+
+Total count and total fees
+
+
+
+1. Add new patient requried to be 
+
+2. Need to remove social
+
+3. Email field should not be mandatory
+
+4. Prirmay an seccondary only one of them should be mandatory 
+
+5. Sex should be in dropdown.
+6. date of birth field shoudl be auto formated with focused calender
+7. account related fields should be removed.
+8. remote status field from addedit patitne. 
+9. marital status also need to be removed. 
+10. Add controll to upload picture for the patient(will be finalized later during next call.)
+11. Document type dropdown should be removed from the add/edit patient
+12. External option is not allowing user to choose at the time of adding editing patient. 
+13. Seach field should be completely transfered to add patient popup. 
+
+14. Email can be repeated for multiple patients. 
+
+15. Need to plan static pages with parent category and sub category
+
+16. Need to fix the add patient module. 
+
+17. Reschedule is needed to be fixed
+
+
+
+5 Aug 2021
+
+1. Need to discuss about MRN to keep or remove from add/edit and patient details page. 
+
+2. Can we use MRN number as patient id?(Need to discuss with Arun).
+
+3. Add state dropdown for patient module and retrieve all states for US. 
+
+4. Need to make the location pages and copy the content from live imagdent site. 
+
+5. Remove Thirty Day, Sixty Day, Ninety Day from patient module. 
+
+
+
+
+1. Contact us mail will sent on support@imagdent.com
+
+2. Remove contact us link from the top navigation. - Done
+3. Add the facebook page box on about us page. Done
+4. Added the condition not to send email if patient email is not avaibale. 
+5. Added the ping with popup of respective addresses. 
+6. Implemented the script to validate contact us form. 
+
+
+
+1. Remote phone, address and email from top left of the front page. 
+2. 
+
+
+
+1. When current date is chosen then past date should not be visisble at the time of creating the case. 
+2. 
+
+
+
+1. Change location to contact us in top naviation. 
+
+2. Send email from contact from to the selected location's email  
+
+3. Add the functinality to change the sequence for the pages from pages module. 
+
+4. Home page content will also be manged from the admin section. 
+
+5. Add new field to add facebook profile URL for location module. 
+
+6. Display the facebook profile URL with F icon on home page location popover.
+
+
+
+1. Manage About Us from the page module if possibile. 
+
+2. Page for the sub pages. 
+
+3. Manage content for the home page. 
+
+4. We are working on image upload in editor to use on main and child pages. 
+
+5. News letter and blog seciton and Emergency Phone, Address, Book By Phone, Email Us will be removed
+
+
+
+
+
+
+I.	Front-End
+a.	Very top banner
+i.	Remove all – Leave blank, blue
+1.	Phone number
+2.	Address
+3.	Email
+4.	login
+
+b.	Tabs functionality and look
+i.	Don’t highlight
+ii.	No drop-down option
+
+c.	Moving banner
+i.	Doesn’t rotate
+ii.	Can’t reset at the end
+
+d.	Tabs on the right side 
+
+e.	Overall layout of the website
+
+f.	Locations Tab / Page
+
+i.	 Directions when you click on the location
+
+g.	Account Sign-Up
+
+i.	Flow is off. 
+
+ii.	What is really needed
+1.	Name
+2.	Email
+
+iii.	Forms needed to be signed, have they been created?
+1.	HIPAA Agreement
+2.	Affiliation Agreement
+
+h.	After log-in
+i.	Go to profile to complete
+ii.	Sign forms
+
+1.	automatically expires after one year, 
+2.	start trying to get signed at 11 months
+
+iii.	Easy link to update profile and payment information
+
+iv.	Second and future logins, straight to dashboard
+i.	Dashboard Options
+i.	Dashboard
+
+1.	Create a case button
+2.	Messages
+3.	Cases in progress
+4.	Invoices
+5.	Link to update profile/payment info
+
+ii.	All Cases
+iii.	Support
+
+1.	How to videos
+a.	How to navigate Invivo viewer
+b.	How to create a case
+2.	Software downloads
+3.	Requirements / How to be prepared
+
+j.	Create a case
+
+i.	Imagdent location should be auto-filled 
+ii.	Doctor should be auto-filled
+
+1.	Only doctors that should be an option is others WITHIN their organization
+a.	ABSOLUTELY SHOULD NOT BE ABLE TO SEE OTHER DOCTORS THAT REFER TO US
+
+iii.	Clinics
+1.	If there’s only one clinic, should be auto-filled
+
+iv.	Patient Search / New patient
+
+1.	Needs “add new patient” button even if there is a search result
+2.	City, state zip vs zip, city state
+3.	MRN needs to be removed
+4.	If pt is over 18 (TX) or 19 (NE) then responsible party is required. 
+
+5.	Single page layout vs double column
+a.	Name
+b.	Preferred name
+c.	Gender
+d.	DOB
+e.	Address
+f.	City, state zip
+g.	Primary number
+h.	Secondary number
+i.	Email
+j.	Responsible party
+k.	Patient Image
+i.	Where does this image display?
+ii.	Should be at the top 
+iii.	Have more of a thumbnail appearance
+v.	Documents
+
+1.	Everything on current list is not needed
+2.	Optional documents
+a.	Pt demographics
+b.	Referral form
+c.	Other
+3.	Notes
+a.	Not needed for patient creation
+vi.	After entering new pt info, should continue with creating a case. 
+vii.	Choose services
+1.	If radiologist interpretation is chosen
+a.	At least, the note on the next screen should be required or…
+b.	After next button is pressed…
+i.	An entirely different page should load 
+1.	With BeamReaders like “Study Purposes” checkboxes
+i.	Airway
+ii.	Impaction
+iii.	Orthodontic
+iv.	Sinus
+v.	Endodontics
+vi.	General
+vii.	Implant
+viii.	Pathology
+ix.	TMJ
+x.	Pain
+2.	Notes for radiologist (required)
+3.	Additional case comments
+4.	Select Report type/services
+a.	If services is additional fee, should be able to see the fee added to current total
+viii.	Need appointment confirmation
+1.	Either a separate print confirmation button or .pdf is generated and pops up on the screen. 
+2.	This confirmation should be saved as a document to the patient’s case. 
+
+
+
+
+1. Add mouse over effect for all navigational link
+2. Auto rotate banners
+2. Registration
+1. Name
+2. Email
+3. password
+
+Assign the abvoe registred user as Refferring provider
+
+Reffering Provider
+
+1. messages
+2. Create Case button on top by removing all top navigation 
+
+
+* Add new link Support
+Download Software
+
+
+* Choose default location
+* choose clinic automatically at the time of creating the case
+* make the add new patient button visible
+* Add patient control should be on top with icon instead of drag and drop
+* Change tab index from left and right
+* try mask for date picker or remove calendar - in progress
+* Display years old value while chosing dob for patient. 
+* Address, City, State, Zipcode , Country (US will be default)
+* For referring provider hide the document and note tab while adding adding patient
+* After adding the patient it should be automatically selected while creating the case. 
+* If radiologist interpretation is chosen then note will be required. 
+* auto display the current date and display the slots - in progress
+* Make the buttons clickable to navigate the steps. - done
+* 
+* 
+
+
+
+1. No need to get the previous dates if current date is chosen
+2. Slots for the sunday is not required to list while creatiing the case. 
+3. Remove saturday and sunday from the list where timeslot is created. 
+* auto display the current date and display the slots - in progress
+* try mask for date picker or remove calendar - in progress
+forms module
+scheduler
+
+
+1. Change the date format for choose date control in case create process. 
+2. Add note while blocking the date or time.
+3. Map the common api that is required for the pertucular role.
+
+
+1. try mask for date picker or remove calendar - in progress
+2. Case confirmation pdf will be save to server and will be linked to patient document. - in progress
+3. For referring provider, all cases should be listed that have been created by that user. - in progress
+
+
+1. Change booked slot color to grey 
+2. By choosing the clinck, only respectivce users that relates to that chosen clinck will be listed. and those users will be referring providers only. 
+3. Change lable of Print Appointment to Print Confirmation
+4. Change Case list to Close
+5. Try to change the page before opening the pring dialog.  
+
+
+
+1. HOme, About Us, Our Services, Support, iMagDent Learning Center 
+
+
+1. Once clients attached to the user will be listed at the time of creating hte clinkc. 
+
+
+
+
+1. For superadmin, front desk, technologiest, imaging cordingator, account, radiolist, callcenter, and implant planner will have all the clinics at the time of creating the case. 
+
+3. Delete user will be deleted from database instead of updating the status. - Done
+
+4. Responsible party (Self) on add edit patient. - Done
+
+5. Remove MRN number from add/edit patient.  - Done
+
+6. make choose tooth option as optional in create case. - Done 
+
+7. Time slot is showing for sunday. - Done
+
+8. Check date format everywhere. - Done
+
+9. Autofill feature shoudle be removed on edit user paage. - Done
+
+10. once patient is deleted all other related records must be deleted. - Done
+
+11. If patient has already been checked in then user will not be able to delete from the system. - Done
+
+12. on confirmation doucment of the case, remove email address and display clinic's phone. - Done
+
+13. Date and time format for confirmation document. Done
+
+14. Remove the text in brakets from case confirmation page - Done
+
+15. Remove header from the confirmatoin document. - Done
+
+16. Need to have multiple user with same email address(Need to discuss)
+
+17. In clinic, make all fields optional for contact tab. - Done
+
+18. After saving the contact of clinic the role is wrong in right container. Done
+
+19. All clinics are not being listed in dropdown on add/edit user. (in process)
+
+20. Move the facebook widget on home page right side. - Done
+
+21. Chagne the image original image color. - Don
+
+22. Cross check the address in google map on contact us page. - Done
+
+23. Add fax number as well on google map popup on contact us page.  - Done
+
+24. We need to make the sub menu box flixibale for all the content. - Done
+
+25. Update clinic is not working on user details page. - Done
+
+26. Remove all icons displayed in right side of banner. - Done
+27. Display the address properly on case confirmation page along with the compolete content of this page. 
+28. Make the arrange call back bigger in font during create case. - Done
+29. Arrange call back cases will have a badge with red color and linked to reschedule case popup. - Done
+30. After clicking on patient checkin please activate the case files tab. - Done
+31. Move case document tab in second place. - Done
+32. Case information, Case documents,  case files, Case partern, case charges, case notes, case activities - Done
+33. Under case document, Referral form. - Done
+34. Check spellinig in case document tab. - Done
+35. There must be an alert to save the uploaded document before proceeding to next step. -Done
+36. Send invoice feature should not be avilable for patient. - Done
+38. Review the payment part for the case. 
+39. Allow .zip extension for case documents. - Done
+40. use icon for image thumnail in case document upload - Done
+50. There will no icons for other type of document. - Done
+
+51. Remove For emergency cases     1-800-267-0000 from the bottom of the page. 
+52. Link the banner text to respective pages. 
+53. Remove the autofill from the signup page in front end. 
+54. Make the year dynamic in bottom of the page. 
+55. Remvoe Privacy Policy from the bottom of the page. 
+56. Need to ask user to accept the agrement during signup. Save the last signed date and do the same after completion of one year. 
+57. Change the Arrange call back to Request a call back and make the font size: 25px and margin from top: 39px.
+58. for Or in case create page make the font size 25px and margin from top 39px. 
+59. We need to add the location controll to let user choose multiple location to relate services. 
+60. services will be listed on the basis of selected location at the time of creating the case. 
+61. Make sure we are displaying the selected location address on confirmation page. 
+62. In case of arrange callback, we need to change the content of confirmation page. 
+63. Change re-schedeule to Schedule on case list page for arrange call back cases only. 
+64. Create a new confirmtaion case file at the time of reschedleing the case. 
+65. Make sure the we correct the information in case confirmation pdf.
+66. Case charge tab is not showing any content.  
+67. At the time deliver case, we will have popup and add the note. 
+68. Email notification is not working while adding a new team member. 
+69. Invoice and receipt layout will be shared by imagdent team. 
+70. in patient A/R, list those patients only whose fees is greater than 0. 
+71. There would be balance column in doctor and patient A/R
+72. Discuss the new point with Aayushi and implement the same. 
+73. Block the location link on banner. 
+74. Change finish to Regiser in signup process in front end. 
+75. Send email to user while registering from front end. 
+76. "Our iMageDent team will contact you soon." correc the spelling. 
+77. State and phone number is missing on case confirmation page. 
+78. Chagne Add Note to Add Delilvery Note. And button should be Save.
+79. Add file upload for location and link the same in front end. 
+80. Add facebook icon for location url. 
+81. Make the copyright in center of the footer. 
+82. Patient checkin button should activate the case document tab not case files.
+83. After clicking on Radiology report case files tab should be activated. 
+84. Change to 12 hour time on case activate tab. 
+85. Once case is delivered case should say anywhere that it has been completed. 
+86. Case status required to be crossed checked. 
+87. Add the functionality to change the doctor from the case list page. 
+
+
+Our iMageDent team will contact you soon.
+
+
+
+You must accept the HIPAA agreement to use iMagDent services.
+
+
+1=>Patient Checkin,2=>Upload Patient Paper work,3=>Accept Payment,4=>Capture records,5=>Ready for Radiologist,6=>Rad Report Completed,7=>Upload re-formated files,8=>Deliver Case,9=>Canceled,10=>Case completed
+
+
+73. Block the location link on banner.  DONE
+74. Change finish to Regiser in signup process in front end. DONE
+75. Send email to user while registering from front end. DONE
+76. "Our iMageDent team will contact you soon." correc the spelling.  DONE
+77. State and phone number is missing on case confirmation page.  DONE
+78. Chagne Add Note to Add Delilvery Note. And button should be Save. DONE
+79. Add file upload for location and link the same in front end. DONE
+80. Add facebook icon for location url. 
+81. Make the copyright in center of the footer.  DONE
+82. Patient checkin button should activate the case document tab not case files. DONE
+83. After clicking on Radiology report case files tab should be activated. DONE
+84. Change to 12 hour time on case activate tab. DONE
+85. Once case is delivered case should say anywhere that it has been completed. Not DONE
+86. Case status required to be crossed checked. DONE
+87. Add the functionality to change the doctor from the case list page. DONE
+
+
+1. Space between patient first name and last name. 
+2. Address is still not properly visible on case confirmation page. 
+3. "Please give 24 hours notice for any changes to your reserved appointment. Should you have any questions, please do not hesitate to contact us." reformate this line. 
+4. Referral form 
+5. Display state in front end under location box. 
+6. Only facebook icon should be displayed for the location facebook profile url. 
+7. Add the functionality to show alert after one year. 
+8. Change location settings to Price settings. 
+9. Use like keyword for doctor search
+10. Add a text box when user choose cheque option to let enter the cheque number. 
+11. End of the day
+12. Stop email untill go live. 
+13. check search functionality in add team member
+
+
+EOD report. 
+1. Patient name is not coming. 
+2. Remove header and add heading in center in bigger font. 
+3. Need to display those payments also that have not been received. 
+4. REname last report Adjustment.
+5. Make the name column linked to user details page under non-financial report 
+6. Make the email linked to default email application.
+7. REmove doller sign from the report in non-financial report. 
+
+Tab order in patient add/edit
+Add edit button on patient details page from case list page. 
+
+1. Allow server to upload max file size that can be around 1gb. 
+2. Correct the spelling of cheque.
+3. receive payment are having error. 
+4. Exchange the position of clinic and doctor dropdown in create case
+5. Case parter added to this case. In case activity
+
+Additional effort. 
+1. Allow admin to edit case and payments and services. 
+2. At the time of accepting the payment admin can choose the back date. 
+3. Add an option to add services to let assign for the doctor only from case charges. 
+
+
+
+AFter pressing tab while adding patient page goes blank
+Cases in progress
+Make sure sorting is working for case list page. 
+
+
+
+
+Fix phone number issue while adding the patient. 
+Previous date should be selected at the time of accepting the payment and it should only be working for admin
+Display inbox on dashboad. 
+
+
+There is several issues in messages module. 
+Check the address on confirmation page. there must be comma between city and state. 
+Before checkin user should change the details in case charge. 
+Unable to apply discount for patient pay
+send user to case details page from the scheduler
+At the time of adding the patient while creating the case document tab and note tab should not be there. 
+
+
+
+
+1. Note should be on case details page. 
+2. Initial note should be displayed on case information tab. 
+
+
+
+1. Add popup for all services. 
+2. partial payment. 
+3. upload multiple files by removing the document type. 
+4. List all the chases from all assigned location. 
+5. Skip status. 
+6. List inbox on dashboard. 
+
+
+
+
+
+
+1. remove the condition to show the slots without comapring the current time for imagine co-ordinator and admin. for rest of the roles it will work as it is. 
+
+2. Send email notification to the admin at the time of registration. 
+
+3. Add service should not be available for anyone 
+
+4. Show the remaining balance next to the patient or doctor total bill. 
+
+5. Remove print receipt from the payment list. It will be managed form the top print receipt. 
+
+6. Add service code in print receipt. Also diagonosis code in print receipt. 
+
+7. Appointment date will be for the serivice date in print receipt. 
+
+
+
+1. Hide action button from the list services box. 
+
+2. Adjust gap from the print receipt page. 
+
+3. Fix the patient search option. 
+
+4. Completed case sould not be retrieved for scheduler page. 
+
+5. Report page; 
+th: 20px
+
+16px
+
+
+6. Delete payment for the case. 
+
+7. make  Remaining balance left aligned. 
+
+patient-list td{
+    font-size: 
+}
+
+
+Demo College: 
+
+1. Permissions. 
+
+2. Patient add and edit. 
+
+
+Reports: 
+
+1. Add total count in right side of the page. 
+
+2. Increae data column in edo page and fpd both. 
+
+3. Increaes the space of price and total count in pdf. 
+
+4. Doctor Ar Columns: 
+1. Doctor Name, 
+2. Invoice No
+3. Date(Appointment Date)
+4. Patient name
+
+* Search by name should be added. 
+
+
+
+1. Add the functionality to let user access only their patient only. At the time of creating the case user will be able to search all patient. 
+
+2. Make the password field filled up while updating the profile. 
+
+3. Hide the clinic field at the time of updating the profile
+
+4. Correct phone field lebel. 
+
+5. Note does not display on case details page. 
+
+6. Once case is canceled then reschedule button should be there. 
+
+7. Once case is canceled other options like notes, payments services should be locked. 
+
+8. make sure skiped options is being logged properly. 
+
+9. Display the email addresss to whome case confirmation is being sent. And add cc text box as well. 
+
+10. Interchange the position of total and remaining for doctor and patient pay box on case details page. 
+
+11. If any information is not available then display text "Please request" in prient receipt. 
+
+12. Remove comma before the zipcode everywehre. 
+
+13. Remove service code from the patient receipt page. 
+
+14. Increase the __ line in bottom of print receipt. 
+
+15. Deleted attachment should not be uploaded while sending message. 
+
+
+1. Once appointment is canceled the slot should be free. 
+
+2. admin and iamging coordinator will be able to update msi and exe extensions. 
+
+3. Add prefix for doctor's name on case confirmation page. 
+
+4. Bedefault location dropdown should have all location 
+
+5. If user search case by location only 7 cases are coming. 
+
+6. Add normal text box to let user add any email address as cc
+
+7. Upload re-formatted file should focus the case files tab. 
+
+8. Once case is completed user should be redirected to dashboard. 
+
+9. Add Sms consent and email consent with calendar for the patient. Calender will have the current date bydefault. 
+
+10. Make the patient radio selected by default at the time of creating the case. 
+
+
+1. teath number changed. 
+
+2. Previous patient details are still in the patient popup. 
+
+3. Patient total year needed to be correcrted. 
+
+4. Patient consent need to be displayed on patient details page. 
+
+5. Patient consents update will only be allowed for admin and imagine co ordinator. 
+
+6. We need to have the completed case on scheduler. 
+
+7. Red report and ready for radiologist skiped but it still show incorrect. 
+
+8. Casereceipt file should be listed in case document not in case files. 
+
+9. Case receipt files should be ordered in ascending order. 
+
+
+Reschedule. 
+
+Upload patient pater work. 
+Upload reformated file should have a pop up. (By clicking on Ok it will move forward with the proper log. )
+
+Schedule button should not be there on case list page for complated case(8-94).
+
+
+
+8-152
+4-30
+
+1. When switch doctor functinality is accessed then that doctor is not being added, however it is adding the logged in user. 
+Did not find
+
+2. Malik, A(This name format should not sent in email while sending the case details.)
+Fixed
+
+4. Phone number format is wrong in front end. 
+Did not find
+
+5. Save referral note sepately while creating the case. 
+Fixed
+
+6. REferrral notes will be seprate from case notes. 
+done
+
+
+
+
+1. We have saved referral notes separately from the case notes. 
+
+2. Displayed referral notes on case details page under case information only. 
+
+3. Fixed accept payment with decimal values. 
+
+4. Fixed the issue for primary doctor that was being deleted while created the case.  
+
+5. Modified the script to change patient name format as Last name and first name initial. 
+
+
+
+Log title error while chanching the status. 
+Null value for patient and user details page. 
+Npi value for users return the sql error. 
+in eod there must be apointment date in date column
+in prodution we need to compare the appointment date to get the records. 
+in export of eod it gives 500 error. 
+Change ractangle health to live mode. 
+Make the ractangle health payment disabled for now. (Urgent)
+Add delete case option for admin.
+delete user is not working. (it says clinic should not be blank. )
+
+
+
+1. Add location field in fornt end registration and send email to all imagine coordinator for this registration. (Hold)
+
+support@imagdent.com
+
+Lebel should be captured for capture record. 
+
+Please change the weekview instead of month view. 
+
+Referring provider should not have receive payment option
+
+
+
+
+
+1. Add procedural notes on case details page and list all service related notes over there. 
+2. Patient date of birth need to be cross checked. 
+3. Intermedia. 
+4. REmove code from the production
+5. Date range for production report. `
+6. Remove  
+
+
+Use amount column to compare for eod.
+
+Doctor's A/R will be calculated on the basis of balance due column
+Add search by case id.
+
+For AR payments columns
+Invoice ID
+Name
+Location
+Amount
+Payment Method
+
+
+Display username who made the payment for total payment collection
+CC is not going to support at the time of registration
+block are not creating
+remove case ID and use available space
+remove npi from the top
+
+
+- Decreased the marging in pdf to utilize available space. 
+- Fixed the URL issue that we noticed yesterday while downloading pdf. 
+- Fixed the block slot issue
+- Removed the case id from the eod pdf. 
+
+
+
+Date of payment is a problem

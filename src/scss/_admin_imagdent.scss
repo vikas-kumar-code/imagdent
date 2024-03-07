@@ -1,0 +1,73 @@
+@import "variables";
+
+// Admin
+.admin {
+  & .mitizwrapper {
+    & .card-body {
+      & img {
+        min-height: size(158);
+        max-height: size(158);
+      }
+    }
+  }
+}
+
+// Side show Scrollbar
+.sidebar-nav {
+  & .ps__rail-y {
+    width: 6px;
+    background-color: transparent;
+    &:hover,
+    &:focus,
+    &.ps--clicking {
+      background-color: transparent !important;
+      opacity: 0.6 !important;
+      & .ps__thumb-y {
+        width: 6px;
+        right: 2px;
+        background-color: #aaa;
+      }
+    }
+  }
+}
+// Side show Scrollbar
+
+// Image uploader //
+
+.upload-btn-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.upload-btn-wrapper input[type="file"] {
+  // font-size: 100px;
+  position: absolute;
+  left: 28px;
+  top: 7px;
+  opacity: 0;
+  width: 125px;
+  height: 120px;
+  padding: 15px;
+}
+.imgupload {
+  height: 8.75rem;
+  width: 8.75rem;
+  border-radius: 50%;
+}
+
+.btn-upload {
+  margin-top: 18px;
+}
+.patient-upload {
+  height:11.25rem;
+  width:11.25rem;
+  border-radius: 50%;
+}
+
+// Image uploader //
+
+// Admin

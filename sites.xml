@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FileZilla3 version="3.51.0" platform="mac">
+	<Servers>
+		<Folder expanded="1">iMagDent<Server>
+				<Host>13.65.0.255</Host>
+				<Port>22</Port>
+				<Protocol>1</Protocol>
+				<Type>0</Type>
+				<User>azureuser</User>
+				<Keyfile>/Volumes/Development/React/imagdent/documents/IMAGD-S-WWWLinux_key.pem</Keyfile>
+				<Logontype>5</Logontype>
+				<EncodingType>Auto</EncodingType>
+				<BypassProxy>0</BypassProxy>
+				<Name>13.65.0.255</Name>
+				<LocalDir>/Volumes/Development/React/imagdent</LocalDir>
+				<RemoteDir>1 0 3 var 3 www 4 html</RemoteDir>
+				<SyncBrowsing>0</SyncBrowsing>
+				<DirectoryComparison>0</DirectoryComparison>
+			</Server>
+		</Folder>
+	</Servers>
+</FileZilla3>

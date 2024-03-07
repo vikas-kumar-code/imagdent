@@ -1,0 +1,1040 @@
+@import "variables";
+
+.imagdent_front {
+  font-family: $familyPrimary;
+  // Header Scss Starts Here
+  & .header_top_contact {
+    font-family: $familySecondary;
+    background-color: $header_top_contact;
+    & .header_left_contact {
+      & ul {
+        list-style: none;
+        padding: size(9) size(0);
+        margin-bottom: size(0);
+        & li {
+          padding: size(0) size(30);
+          display: inline-block;
+          color: $whiteTextColor;
+          border-right: $blueBorderColor solid size(1);
+          &:first-child {
+            padding-left: size(0);
+          }
+          &:last-child {
+            border-right: none;
+            padding-right: size(0);
+          }
+          & a {
+            color: $whiteTextColor;
+            font-size: size(12);
+          }
+        }
+      }
+    }
+    & .header_right_contact {
+      & ul {
+        list-style: none;
+        padding: size(0);
+        margin-bottom: size(0);
+        & li {
+          padding: size(10) size(12);
+          display: inline-block;
+          color: $whiteTextColor;
+          border-right: $blueBorderColor solid size(1);
+          &:first-child {
+            border-left: $blueBorderColor solid size(1);
+          }
+          & a {
+            background-color: $whiteBackground;
+            color: $header_top_contact;
+            border-radius: 50%;
+            width: size(22);
+            height: size(22);
+            display: block;
+            text-align: center;
+          }
+        }
+      }
+      & .LoginFormTop {
+        & .form-group {
+          display: inline-block;
+          margin-bottom: size(0);
+          margin-top: size(4);
+          & input {
+            width: size(115);
+            margin: 0 size(5);
+            height: size(34);
+          }
+          & .artical-button {
+            padding: size(6) size(25);
+            background: $darkblueColor none repeat scroll 0 0;
+          }
+        }
+      }
+    }
+  }
+  & .header_main {
+    padding: size(20) size(0);
+    font-family: $familySecondary;
+    & .header_content {
+      display: flex;
+      & .brand-logo {
+        & img {
+          height: size(50);
+        }
+      }
+      & .navbar-toggler {
+        display: none;
+      }
+      & .navbar {
+        padding: size(18) size(0);
+        line-height: size(0);
+        & li {
+          padding: size(0) size(4);
+          padding: size(0) size(1);
+          &:last-child {
+            padding-right: size(0);
+            & .nav-link {
+              padding-right: size(0);
+            }
+          }
+          & .nav-link {
+            color: $navbarColor;
+            font-weight: $semibold;
+            font-size: size(13);
+            text-transform: uppercase;
+            cursor: pointer;
+            @media (min-width:768px) and (max-width: 991px) {
+              line-height: 20px;
+            }
+            &:focus {
+              color: $blueTextColor;
+              .dropdown-content {
+                 display: none;
+              }
+            }
+            &:hover {
+              color: $blueTextColor;
+            }
+          }
+        }
+      }
+    }
+  }
+  & .sticky {
+    transition: all 0.5s ease;
+    & .header_main {
+      transition: all 0.5s ease;
+      padding: size(5) size(0);
+      box-shadow: $headerBoxShadow;
+    }
+  }
+  // Header Scss Ends Here
+
+  // Banner Scss Starts Here
+  .carousel-inner {
+    @media (max-width: 567px) {
+      min-height: auto !important;
+    }
+  }
+  .slide {
+    & .carousel-item {
+      & img {
+        min-height: size(450);
+        max-height: size(450);
+      }
+      & .coursal-content {
+        position: absolute;
+        text-align: center;
+        top: 50%;
+        left: 50%;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        & h1 {
+          color: $whiteTextColor;
+          font-weight: $bold;
+          @media (max-width: 567px) {
+            font-size: size(20) !important;
+            padding: size(10);
+          }
+        }
+        & h3 {
+          color: $whiteTextColor;
+          font-weight: $regular;
+        }
+        & a {
+          color: $whiteTextColor;
+          border: $whiteTextColor solid size(2);
+          border-radius: size(30);
+          padding: size(10) size(30);
+          display: inline-block;
+          margin-top: size(20);
+          font-size: size(16);
+          cursor: pointer;
+          position: relative;
+          top: size(-8);
+          &:hover {
+            text-decoration: none;
+            background-color: $buttonColor;
+            transition: all 1s ease;
+          }
+          & i {
+            margin-left: size(10);
+            font-size: size(12);
+            vertical-align: middle;
+          }
+        }
+      }
+
+      & .background-opacity {
+        background-color: rgba($color: #000000, $alpha: 0.4);
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: size(0);
+      }
+    }
+  }
+  .custom-location-tab {
+    & .facebook_boxes {
+      background-color: #fdfdfd;
+      border-radius: 30px;
+      box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.2);
+      padding: 8px 16px;
+      margin-top: 5px;
+      display: inline-block;
+      color: #000;
+      font-size: 14px;
+      text-decoration: underline;
+      border: transparent solid 2px;
+      & img {
+        width: 24px;
+        margin-right: 4px;
+      }
+      &:hover{
+        border: #1b6aaa solid 2px;
+      }
+    }
+  }
+  // Banner Scss Starts Here
+
+  // Welcome Imagdent Scss Starts Here
+  & .welcome_imagdent {
+    font-family: $familyPrimary;
+    padding-top: size(65);
+    & .welcome_imagdent_details {
+      color: $primaryTextColor;
+      & h4 {
+        font-weight: $regular;
+      }
+      & h2 {
+        font-size: size(32);
+        font-weight: $semibold;
+        & span {
+          color: $blueTextColor;
+        }
+      }
+      & p {
+        font-size: size(13);
+        padding: size(15) size(0) size(35) size(0);
+      }
+      & a {
+        font-size: size(16);
+        color: $buttonColor;
+        font-weight: $semibold;
+        &:hover {
+          text-decoration: none;
+        }
+        & i {
+          font-size: size(12);
+          margin-left: size(10);
+        }
+      }
+    }
+    & .embed_iframe {
+      & iframe {
+        width: 100%;
+        height: size(280);
+      }
+    }
+  }
+  // Welcome Imagdent Scss Ends Here
+
+  // General Services Scss Starts Here
+  & .general_services {
+    font-family: $familyPrimary;
+    padding-top: size(55);
+    text-align: center;
+    & h5 {
+      color: $buttonColor;
+    }
+    & h2 {
+      font-size: size(32);
+      font-weight: $semibold;
+    }
+    & hr {
+      background-color: $header_top_contact;
+      height: size(3);
+      width: size(55);
+      margin-bottom: size(42);
+    }
+    & .services {
+      display: flex;
+      & .services_boxes {
+        background-color: $serviceBackground;
+        display: flex;
+        flex: 1;
+        height: size(265);
+        box-sizing: border-box;
+        margin-bottom: size(15);
+        &:first-child {
+          margin-right: size(15);
+        }
+        &:last-child {
+          flex: 2;
+        }
+
+        &.virtual_implant {
+          background-image: $virtualGradientColor;
+        }
+        & .services_boxes_details {
+          margin: auto;
+          &.cbct_services {
+            margin: size(0);
+            width: 100%;
+          }
+          & i {
+            font-size: size(70);
+            color: $header_top_contact;
+          }
+          & h3 {
+            padding-top: size(20);
+          }
+          & a {
+            border: $blueBorderColor solid size(2);
+            border-radius: size(30);
+            padding: size(10) size(20);
+            font-weight: $semibold;
+            font-size: size(14);
+            margin-top: size(10);
+            display: inline-block;
+            & i {
+              font-size: size(12);
+              margin-left: size(10);
+            }
+            &:hover {
+              text-decoration: none;
+            }
+          }
+        }
+        & .service_boxes_lg{
+          display: flex;
+          height: 300px;
+        }
+      }
+    }
+
+    & .services_2 {
+      display: flex;
+      & .services_boxes {
+        flex: 1;
+        &:first-child {
+          flex: 4;
+          margin-right: size(15);
+        }
+        & .service_boxes_lg{
+          display: flex;
+          height: 300px;
+        }
+      }
+    }
+    // & .services_boxes{
+    //    background-color: $serviceBackground;
+    //    display: flex;
+    //    height: size(265);
+    //    box-sizing: border-box;
+    //    margin-bottom: size(15);
+    //    &.virtual_implant{
+    //      background-image: $virtualGradientColor;
+    //    }
+    //    & .services_boxes_details{
+    //       margin: auto;
+    //       &.cbct_services{
+    //         margin: size(0);
+    //         width: 100%;
+    //       }
+    //       & i{
+    //         font-size: size(70);
+    //         color: $header_top_contact;
+    //       }
+    //       & h3{
+    //         padding-top: size(20);
+    //       }
+    //       & a{
+    //         border: $blueBorderColor solid size(2);
+    //         border-radius: size(30);
+    //         padding: size(10) size(20);
+    //         font-weight: $semibold;
+    //         font-size: size(14);
+    //         margin-top: size(10);
+    //         display: inline-block;
+    //         & i{
+    //           font-size: size(12);
+    //           margin-left: size(10);
+    //         }
+    //         &:hover{
+    //           text-decoration: none;
+    //         }
+    //       }
+    //    }
+    // }
+  }
+  // General Services Scss Ends Here
+
+  // Choose Us Scss Starts Here
+  & .choose_us {
+    font-family: $familyPrimary;
+    padding-top: size(40);
+    text-align: center;
+    & h5 {
+      color: $buttonColor;
+    }
+    & h2 {
+      font-size: size(32);
+      font-weight: $semibold;
+    }
+    & hr {
+      background-color: $header_top_contact;
+      height: size(3);
+      width: size(55);
+      margin-bottom: size(42);
+    }
+    & .choose_us_details {
+      & .icn-text-circle {
+        width: size(70);
+        height: size(70);
+        background-image: $chooseUsGradientColor;
+        margin: auto;
+        border-radius: 50%;
+        margin-bottom: size(30);
+        & i {
+          color: $whiteTextColor;
+          font-size: size(42);
+          line-height: size(70);
+        }
+      }
+      & h4 {
+        font-weight: $semibold;
+      }
+      & p {
+        margin-top: size(20);
+        font-size: size(13);
+      }
+      &:hover {
+        & .icn-text-circle {
+          box-shadow: 0 0 0 7px rgba(30, 118, 189, 0.2);
+          transition: all 1s ease;
+        }
+      }
+    }
+  }
+  // Choose Us Scss Ends Here
+
+  // Patient Testimonials Scss Starts Here
+  & .patient_testimonials {
+    font-family: $familyPrimary;
+    padding-top: size(40);
+    display: flex;
+    & .testimonials_details {
+      flex: 1;
+      display: flex;
+      text-align: right;
+      background-color: $serviceBackground;
+      & .contents {
+        margin: auto size(50) auto size(140);
+        & h5 {
+          font-weight: $regular;
+        }
+        & h2 {
+          font-weight: $bold;
+          & span {
+            color: $blueTextColor;
+          }
+        }
+        & p {
+          margin: size(30) 0;
+          font-size: size(13);
+          & i {
+            color: $blueTextColor;
+          }
+        }
+      }
+    }
+    & .testimonials_image {
+      flex: 1;
+      display: -ms-flexbox; /* IE10 */
+      display: flex;
+      -ms-flex-wrap: wrap; /* IE10 */
+      flex-wrap: wrap;
+      padding: 0 4px;
+      & .testimonial_image_column {
+        -ms-flex: 33.33%; /* IE10 */
+        flex: 33.33%;
+        max-width: 33.33%;
+        & img {
+          vertical-align: middle;
+          width: 100%;
+        }
+      }
+    }
+  }
+  // Patient Testimonials Scss Starts Here
+
+  // Achieved Scss Starts Here
+  & .achieved {
+    font-family: $familyPrimary;
+    padding-top: size(40);
+    text-align: center;
+    & h5 {
+      color: $buttonColor;
+    }
+    & h2 {
+      font-size: size(32);
+      font-weight: $semibold;
+    }
+    & hr {
+      background-color: $header_top_contact;
+      height: size(3);
+      width: size(55);
+      margin-bottom: size(42);
+    }
+    & .achieved_box {
+      box-shadow: $achievedBoxShadow;
+      padding: size(20);
+      border-radius: size(4);
+      & i {
+        font-size: size(50);
+        color: $blueTextColor;
+      }
+      & h4 {
+        font-size: size(42);
+      }
+      & hr {
+        background-color: $blueBorderColor;
+        height: size(1);
+        width: size(35);
+        margin-bottom: size(5);
+        margin-top: size(0);
+      }
+      & p {
+        font-weight: $semibold;
+      }
+    }
+  }
+  // Achieved Scss Ends Here
+
+  // Patient Information Scss Starts Here
+  & .patient_information {
+    font-family: $familyPrimary;
+    background-color: $serviceBackground;
+    margin-top: size(50);
+    display: flex;
+    & .patient_information_details {
+      flex: 1;
+      & img {
+        width: 100%;
+      }
+
+      & .patient_information_content {
+        padding: size(0) size(60);
+        & h2 {
+          font-size: size(32);
+          font-weight: $semibold;
+          & span {
+            color: $blueTextColor;
+          }
+        }
+        & .custom_tabing {
+          & .nav-item {
+            & .nav-link {
+              padding: size(15);
+              cursor: pointer;
+              font-weight: $semibold;
+              padding: size(15) size(15) size(15) size(0);
+              &::after {
+                border-right: $navbarColor solid size(1);
+                content: "";
+                height: size(1);
+                margin-left: size(15);
+              }
+              &:hover {
+                color: $blueTextColor;
+              }
+              &.active {
+                color: $blueTextColor;
+              }
+            }
+            &:last-child {
+              & .nav-link {
+                &::after {
+                  border-right: none;
+                }
+              }
+            }
+          }
+        }
+        & .custom_accordian {
+          margin-right: size(14);
+          & .card {
+            border: none;
+            & .card-header {
+              box-shadow: $achievedBoxShadow;
+              border-bottom: none;
+              z-index: 1;
+              background-color: $whiteBackground;
+              color: $blackTextColor;
+              font-weight: $semibold;
+              cursor: pointer;
+              & span {
+                color: $blueTextColor;
+                margin-right: size(5);
+              }
+              & img {
+                width: auto;
+                float: right;
+                margin-top: size(8);
+              }
+            }
+            & .collapse {
+              & .card-body {
+                padding: size(15) size(40);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  // Patient Information Scss Ends Here
+
+  // contact Scss Starts Here
+  & .contact {
+    font-family: $familyPrimary;
+    padding: size(50) size(0);
+    text-align: center;
+    & h5 {
+      margin-top: size(10);
+    }
+  }
+  // contact Scss Ends Here
+
+  // contact Scss Starts Here
+  & .footer-Section {
+    & .footer-subscribe {
+      & svg {
+        font-size: size(24) !important;
+      }
+    }
+  }
+  // contact Scss Ends Here
+
+  // Login Scss Starts Here
+  & .login-enter-section {
+    margin-top: size(40);
+    & .forgot_password {
+      font-size: size(12);
+      float: right;
+    }
+  }
+  // Login Scss Ends Here
+}
+
+@media screen and (max-width: 800px) {
+  .column {
+    -ms-flex: 50%;
+    flex: 50%;
+    max-width: 50%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .column {
+    -ms-flex: 100%;
+    flex: 100%;
+    max-width: 100%;
+  }
+}
+
+@media only screen and (max-width: 567px) {
+  .imagdent_front {
+    // Header Scss Starts Here
+    & .header_top_contact {
+      & .header_right_contact {
+        & .LoginFormTop {
+          & .form-group {
+            & input {
+              width: size(90);
+              margin: 0 size(2);
+            }
+          }
+        }
+      }
+    }
+    // Header Scss Ends Here
+
+    // Banner Scss Starts Here
+    .slide {
+      & .carousel-item {
+        & img {
+          min-height: size(250);
+          max-height: size(250);
+        }
+        & .coursal-content {
+          top: 15%;
+          left: inherit;
+          -ms-transform: none;
+          transform: none;
+          & a {
+            padding: size(6) size(30);
+            margin-top: size(20);
+            font-size: size(12);
+          }
+        }
+      }
+    }
+    // Banner Scss Starts Here
+
+    // Welcome Imagdent Scss Starts Here
+    & .welcome_imagdent {
+      padding-top: size(30);
+      & .welcome_imagdent_details {
+        & h4 {
+          font-size: size(16);
+        }
+        & h2 {
+          font-size: size(22);
+        }
+        & p {
+          font-size: size(12);
+          padding: size(10) size(0);
+          margin-bottom: size(0);
+        }
+        & a {
+          margin-bottom: size(20);
+          display: block;
+        }
+      }
+    }
+    // Welcome Imagdent Scss Ends Here
+
+    // General Services Scss Starts Here
+    & .general_services {
+       padding-top: size(30);
+        & h2 {
+          font-size: size(22);
+        }
+        & hr {
+          margin-bottom: size(20);
+        }
+        & .services {
+          display: block;
+          & .services_boxes {
+            height: auto;
+            margin-bottom: size(15);
+            &:first-child {
+              margin-right: size(0);
+            }
+
+            & .services_boxes_details {
+              margin: auto;
+              &.cbct_services {
+                margin: size(0);
+                width: 100%;
+              }
+              & i {
+                font-size: size(70);
+                color: $header_top_contact;
+              }
+              & h3 {
+                padding-top: size(20);
+              }
+              & a {
+                border: $blueBorderColor solid size(2);
+                border-radius: size(30);
+                padding: size(10) size(20);
+                font-weight: $semibold;
+                font-size: size(14);
+                margin-top: size(10);
+                display: inline-block;
+                & i {
+                  font-size: size(12);
+                  margin-left: size(10);
+                }
+                &:hover {
+                  text-decoration: none;
+                }
+              }
+            }
+            & .service_boxes_lg{
+              display: flex;
+              height: 300px;
+            }
+          }
+        }
+
+      & .services_2 {
+        display: block;
+        & .services_boxes {
+          flex: 1;
+          &:first-child {
+            flex: 4;
+            margin-right: size(15);
+          }
+          & .service_boxes_lg{
+            display: flex;
+            height: 300px;
+          }
+        }
+      }
+
+    }
+    // General Services Scss Ends Here
+    & .patient_testimonials {
+      display: none;
+    }
+  }
+}
+
+@media only screen and (max-width: 991px) {
+  .imagdent_front {
+    // Header
+    & .header_top_contact {
+      & .header_left_contact {
+        & ul {
+          padding: size(5) size(0);
+          & li {
+            padding: size(0) size(10);
+            & svg {
+              font-size: size(10);
+            }
+            & a {
+              font-size: size(10);
+            }
+            &:last-child {
+              padding-left: size(0);
+            }
+          }
+        }
+      }
+      & .ml-auto {
+        margin-left: size(0) !important;
+        & .header_right_contact {
+          & ul {
+            & li {
+              padding: size(4) size(12);
+              & a {
+                width: size(20);
+                height: size(20);
+              }
+            }
+          }
+        }
+      }
+    }
+    & .header_main {
+      padding: size(10) size(0);
+      & .header_content {
+        & .brand-logo {
+          & img {
+            height: size(40);
+          }
+        }
+        & .navbar-toggler {
+          display: block;
+          margin-top: size(6);
+          border: $blueBorderColor solid size(1);
+          color: $header_top_contact;
+        }
+        & .navbar {
+          padding: size(0);
+          position: absolute;
+          left: 0;
+          z-index: 1;
+          width: 100%;
+          & ul {
+            width: 100%;
+            position: absolute;
+            top: size(12);
+            background-color: $whiteBackground;
+            border-top: $blueBorderColor solid size(1);
+            padding: size(0) size(10);
+            box-shadow: $headerBoxShadow;
+          }
+        }
+      }
+    }
+    // Header
+  }
+}
+
+
+
+
+
+/* dropdown */
+.dropdown {
+  position: relative;
+  display: inline-block;
+  @media (max-width: 991px) {
+    width: 100%;
+    .nav-link {
+      line-height: 20px;
+    }
+  }
+  & .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f9f9f9;
+      min-width: 140px;
+      min-width: 200px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      padding: 12px 0;
+      z-index: 1;
+      line-height: 16px;
+      & ul {
+        list-style: none;
+        padding: 0;
+        & li {
+          padding: 10px 4px !important;
+          &:hover {
+            background-color: #ececec;
+          }
+          & .nav-link {
+            font-size: size(12) !important;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+        }
+      }
+  }
+  &:hover {
+    & .dropdown-content {
+      display: block;
+      @media (max-width:991px) {
+        width: 100%;
+        ul {
+          li {
+            padding: 4px !important;
+          }
+        }
+      }
+    }
+  } 
+}
+.dropdown-content-remover {
+  display: none !important;
+}
+/* dropdown */
+
+
+
+/* Location */
+
+.google_map {
+    width: 100%;
+    height: 100%;
+}
+
+.contact_us_map {
+  // box-shadow: 0px 2px 10px 10px rgba(0, 0, 0, 0.03);
+  box-sizing: border-box;
+  padding: size(25);
+  background: #f5f5f5 none repeat scroll 0 0;
+  border: 1px solid #e3e3e3;
+  border-radius: size(5);
+    & h2{
+      color:#444444;
+      font-size: 24px;
+      font-weight: bold;
+    }
+    & label{
+      color: #444444;
+      font-size: 16px;
+      font-weight: bold;
+    }
+    & .form-control, .select_location, textarea{
+        width: 100%;
+        height: calc(1.2em + 0.75rem + 2px);
+        border-radius: 0px;
+        font-size: 14px;
+        color: #5c6873;
+        background-color: #fff;
+        border: 2px solid #dddddd;
+    }
+    
+    & textarea{
+       height: inherit;
+       padding: 0 size(5);
+    }
+
+    & .btn{
+        background: #0066cc none repeat scroll 0 0;
+        border: 1px solid #0066cc;
+        border-radius: 40px;
+        color: #fff;
+        font-family: "Lato", sans-serif;
+        font-size: 16px;
+        padding: 10px 30px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+  .google_map {
+    height: 50vh;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 991px) {
+  .contact_us_map {
+    padding: size(15) size(10);
+  }
+}
+
+/* Location */
+
+/* FAQ */
+
+.custom_accordian {
+  // margin-right: size(14);
+  & .card {
+    border: none;
+    & .card-header {
+      box-shadow: $achievedBoxShadow;
+      border-bottom: none;
+      z-index: 1;
+      background-color: $whiteBackground;
+      color: $blackTextColor;
+      font-weight: $semibold;
+      cursor: pointer;
+      & span {
+        color: $blueTextColor;
+        margin-right: size(5);
+      }
+      & img {
+        width: auto;
+        float: right;
+        margin-top: size(8);
+      }
+    }
+    & .collapse {
+      & .card-body {
+        padding: size(15) size(40);
+        @media (max-width: 767px) {
+          padding-left: 0;
+        }
+      }
+    }
+  }
+}
+
+/* FAQ */
