@@ -2,12 +2,13 @@
 
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
-require_once(__DIR__.'/functions.php');
+require_once(__DIR__ . '/functions.php');
 $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'timeZone' => 'America/Chicago',
+    'defaultRoute' => 'site/index',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm' => '@vendor/npm-asset',
@@ -15,23 +16,23 @@ $config = [
     'components' => [
         'sms' => [
             'class' => 'wadeshuler\sms\twilio\Sms',
-        
+
             // Advanced app use '@common/sms', basic use '@app/sms'
             'viewPath' => '@app/sms',     // Optional: defaults to '@app/sms'
-        
+
             // send all sms to a file by default. You have to set
             // 'useFileTransport' to false and configure the messageConfig['from'],
             // 'sid', and 'token' to send real messages
             'useFileTransport' => false,
-        
+
             'messageConfig' => [
                 'from' => '+14022567669',  // Your Twilio number (full or shortcode)
             ],
-        
+
             // Find your Account Sid and Auth Token at https://twilio.com/console
             'sid' => 'ACf7aef4f496358019eecb4b02ff26cae4',
             'token' => 'c3912cafdd7f4d1eb3630ba407825a95',
-        
+
             // Tell Twilio where to POST information about your message.
             // @see https://www.twilio.com/docs/sms/send-messages#monitor-the-status-of-your-message
             //'statusCallback' => 'https://example.com/path/to/callback',      // optional
@@ -87,7 +88,7 @@ $config = [
                 'password' => $params['mailerSettings']['transport']['password'],
                 'port' => $params['mailerSettings']['transport']['port'],
                 'encryption' => $params['mailerSettings']['transport']['encryption']
-                
+
                 /* 'streamOptions' => [
                     'ssl' => [
                         'verify_peer' => false,

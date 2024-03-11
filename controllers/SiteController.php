@@ -130,14 +130,14 @@ class SiteController extends Controller
 
     public function actionDownload($file = null)
     {
-        if($file != null){
+        if ($file != null) {
             $model = new \app\models\Documents;
-            $find = $model->find()->where(['document_name'=>$file])->one();
-            if($find){
-                return Yii::$app->response->sendFile($_SERVER['DOCUMENT_ROOT'] . "/documents/".$file, $find->document_name_original);
+            $find = $model->find()->where(['document_name' => $file])->one();
+            if ($find) {
+                return Yii::$app->response->sendFile($_SERVER['DOCUMENT_ROOT'] . "/documents/" . $file, $find->document_name_original);
             }
         }
-        
+
         //exec('wget http://imagdent.com/documents/415359-2.inv');
     }
 

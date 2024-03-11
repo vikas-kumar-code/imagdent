@@ -255,6 +255,7 @@ class RoleController extends Controller
 
             if (isset($role_id) && !empty($role_id)) {
 
+
                 if ($role_id == 1) {
                     //$find = $model->find()->groupBy("module_name")->asArray()->all();
                     return [

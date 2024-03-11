@@ -19,15 +19,15 @@ class Common extends Component
             $compose->setFrom([$data['body']->from_email => $data['body']->from_label]);
             $compose->setTo($data['to']);
             //$compose->setTo('opnsrc.devlpr@gmail.com');
-            if(isset($data['cc']) && !empty($data['cc'])){
+            if (isset($data['cc']) && !empty($data['cc'])) {
                 $compose->setCc($data['cc']);
             }
             if (isset($data['body']->reply_to_email) && !empty($data['body']->reply_to_email)) {
                 $compose->setReplyTo($data['body']->reply_to_email);
-            } 
+            }
             $compose->setSubject($data['subject']);
             return $compose->send();
-        }catch (\Exception $e){
+        } catch (\Exception $e) {
             return $e->getMessage();
         }
     }
@@ -150,15 +150,13 @@ class Common extends Component
         //echo $query->createCommand()->getRawSql();die;
         if (isset($find) && !empty($find)) {
             $permission = unserialize($find->permission);
-            if($module_name == 'Reports'){
+            if ($module_name == 'Reports') {
                 if (array_key_exists('Financial Reports', $permission) && in_array($action_name, $permission['Financial Reports'])) {
                     return true;
-                }
-                else if (array_key_exists('Non-Financial Reports', $permission) && in_array($action_name, $permission['Non-Financial Reports'])) {
+                } else if (array_key_exists('Non-Financial Reports', $permission) && in_array($action_name, $permission['Non-Financial Reports'])) {
                     return true;
                 }
-            }
-            else{
+            } else {
                 if (array_key_exists($module_name, $permission) && in_array($action_name, $permission[$module_name])) {
                     return true;
                 }
@@ -191,26 +189,28 @@ class Common extends Component
         }
     }
 
-    public function addLog($case_id, $title, $message = null){
+    public function addLog($case_id, $title, $message = null)
+    {
         $model = new \app\models\CaseLog;
         $model->case_id = $case_id;
         $model->added_by = Yii::$app->user->identity->id;
         $model->title = $title;
         $model->message = $message;
-        if($model->validate()){
+        if ($model->validate()) {
             $model->save();
         }
     }
 
-    public function updateBalance($case_id){
+    public function updateBalance($case_id)
+    {
         $total_amount_to_be_paid_by_doctor = [];
-        $query = \app\models\CaseServices::find()->where(['case_id'=>$case_id,'who_will_pay'=>0]);
+        $query = \app\models\CaseServices::find()->where(['case_id' => $case_id, 'who_will_pay' => 0]);
         $total_amount_to_be_paid_by_doctor['sub_total'] = $query->sum('sub_total');
         $total_amount_to_be_paid_by_doctor['discount'] = $query->sum('discount');
 
         //print_r($total_amount_to_be_paid_by_doctor);die;
         $total_amount_to_be_paid_by_patient = [];
-        $query = \app\models\CaseServices::find()->where(['case_id'=>$case_id,'who_will_pay'=>1]);
+        $query = \app\models\CaseServices::find()->where(['case_id' => $case_id, 'who_will_pay' => 1]);
         $total_amount_to_be_paid_by_patient['sub_total'] = $query->sum('sub_total');
         $total_amount_to_be_paid_by_patient['discount'] = $query->sum('discount');
 
@@ -218,8 +218,8 @@ class Common extends Component
         //print_r($total_amount_to_be_paid_by_doctor);die;
         //$total_amount_paid_by_doctor = \app\models\Payments::find()->where(['case_id'=>$case_id])->andWhere(['!=','user_id',NULL])->sum('amount');
         //$total_amount_paid_by_patient = \app\models\Payments::find()->where(['case_id'=>$case_id])->andWhere(['!=','patient_id',NULL])->sum('amount');
-        $find = \app\models\Cases::findOne(['id'=>$case_id]);
-        if($find){
+        $find = \app\models\Cases::findOne(['id' => $case_id]);
+        if ($find) {
             /* $find->doctor_balance = $total_amount_to_be_paid_by_doctor - $total_amount_paid_by_doctor;
             $find->patient_balance = $total_amount_to_be_paid_by_patient - $total_amount_paid_by_patient; */
 
@@ -228,18 +228,18 @@ class Common extends Component
             $find->patient_balance = $total_amount_to_be_paid_by_patient['sub_total'];
             $find->patient_discount = $total_amount_to_be_paid_by_patient['discount'];
             $find->total_price = $total_amount_to_be_paid_by_doctor['sub_total'] + $total_amount_to_be_paid_by_patient['sub_total'];
-            if($find->save()){
+            if ($find->save()) {
                 $model = new \app\models\Invoices;
-                $pdfind = $model->find()->where(['case_id'=>$case_id,'status'=>0])->andWhere(['!=','user_id','NULL'])->one();
-                if($pdfind){
+                $pdfind = $model->find()->where(['case_id' => $case_id, 'status' => 0])->andWhere(['!=', 'user_id', 'NULL'])->one();
+                if ($pdfind) {
                     $pdfind->amount = $total_amount_to_be_paid_by_doctor['sub_total'] + $total_amount_to_be_paid_by_doctor['discount'];
                     $pdfind->sub_total = $total_amount_to_be_paid_by_doctor['sub_total'];
                     $pdfind->discount = $total_amount_to_be_paid_by_doctor['discount'];
                     $pdfind->balance_amount = $total_amount_to_be_paid_by_doctor['sub_total'];
-                    if($pdfind->save()){
+                    if ($pdfind->save()) {
                         $model = new \app\models\Invoices;
-                        $ppfind = $model->find()->where(['case_id'=>$case_id,'status'=>0])->andWhere(['!=','patient_id','NULL'])->one();
-                        if($ppfind){
+                        $ppfind = $model->find()->where(['case_id' => $case_id, 'status' => 0])->andWhere(['!=', 'patient_id', 'NULL'])->one();
+                        if ($ppfind) {
                             $ppfind->amount = $total_amount_to_be_paid_by_patient['sub_total'] + $total_amount_to_be_paid_by_patient['discount'];
                             $ppfind->sub_total = $total_amount_to_be_paid_by_patient['sub_total'];
                             $ppfind->discount = $total_amount_to_be_paid_by_patient['discount'];
@@ -248,23 +248,24 @@ class Common extends Component
                         }
                     }
                 }
-            }
-            else{
-                print_r($find->getErrors());die;
+            } else {
+                print_r($find->getErrors());
+                die;
             }
         }
     }
 
-    public function getFullName($data) {
+    public function getFullName($data)
+    {
         $name = "";
         if (isset($data['prefix'])) {
-          $name .= $data['prefix'] . ' ';
+            $name .= $data['prefix'] . ' ';
         }
         if (isset($data['first_name'])) {
-          $name .= $data['first_name'] . ' ';
+            $name .= $data['first_name'] . ' ';
         }
         if (isset($data['middle_name'])) {
-          $name .= $data['middle_name'] . ' ';
+            $name .= $data['middle_name'] . ' ';
         }
         if (isset($data['last_name'])) {
             $name .= $data['last_name'] . ' ';
@@ -276,7 +277,7 @@ class Common extends Component
     }
     // function mailEventTrigger($user_data)
     // {
-       
+
     //     $to = ArrayHelper::getColumn(User::find()->where(['id' => $user_data['user_id']])->asArray()->all(), 'email');
     //     $user_model = User::findOne(['id' => $user_data['user_id']]);
 

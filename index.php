@@ -3,7 +3,7 @@
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 phpinfo();die; */
-header('Access-Control-Allow-Origin: http://localhost:8080');
+//header('Access-Control-Allow-Origin: http://localhost:3000');
 header('Access-Control-Allow-Credentials: true');
 header("Access-Control-Allow-Methods: GET,POST,OPTIONS,DELETE");
 header('Access-Control-Allow-Headers: Origin,Content-Type,X-Auth-Token,X-Api-Key,Authorization');

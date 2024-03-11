@@ -14,18 +14,18 @@
 ]; */
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=localhost;dbname=mitizt5_imgdent_live',
-    'username' => 'mitizt5_mazeeca',
-    'password' => 'kCSEZ+-+BjwD',
+    'dsn' => 'mysql:host=localhost;dbname=imagdentdev',
+    'username' => 'root',
+    'password' => 'Mitiz@C0llege3214#',
     'charset' => 'utf8',
-    'on afterOpen' => function($event) { 
-        $event->sender->createCommand("SET time_zone='-06:00';")->execute(); 
+    'on afterOpen' => function ($event) {
+        $event->sender->createCommand("SET time_zone='-06:00';")->execute();
     },
 
     // Schema cache options (for production environment)
     /* 'enableSchemaCache' => true,
     'schemaCacheDuration' => 60,
     'schemaCache' => 'cache', */
-]; 
+];
 
 
