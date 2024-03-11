@@ -1,29 +1,33 @@
-# See https://help.github.com/ignore-files/ for more about ignoring files.
-
-# dependencies
-/node_modules
-/api/vendor
-/documents/proposal
-package-lock.json
-/config/db.php
-/config/params.php
-
-# testing
-/coverage
-
-# production
-/build
-
-# misc
-.DS_Store
+# phpstorm project files
 .idea
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
 
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+# netbeans project files
+nbproject
 
-IMAGD-S-WWWLinux_key.pem
+# zend studio for eclipse project files
+.buildpath
+.project
+.settings
+
+# windows thumbnail cache
+Thumbs.db
+
+# composer vendor dir
+/vendor
+
+# composer itself is not needed
+composer.phar
+
+# Mac DS_Store Files
+.DS_Store
+
+# phpunit itself is not needed
+phpunit.phar
+# local phpunit config
+/phpunit.xml
+
+tests/_output/*
+tests/_support/_generated
+
+#vagrant folder
+/.vagrant
