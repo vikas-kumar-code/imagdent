@@ -16,7 +16,7 @@ return [
     'class' => 'yii\db\Connection',
     'dsn' => 'mysql:host=localhost;dbname=imagdentdev',
     'username' => 'root',
-    'password' => 'C0llege123#04',
+    'password' => '',
     'charset' => 'utf8',
     'on afterOpen' => function ($event) {
         $event->sender->createCommand("SET time_zone='-06:00';")->execute();
