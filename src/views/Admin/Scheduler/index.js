@@ -29,7 +29,10 @@ import {
   Month,
   Resize,
   EventSettingsModel,
+  DataManager,
+  WebApiAdaptor
 } from "@syncfusion/ej2-react-schedule";
+import moment from "moment";
 
 import "../../../../node_modules/@syncfusion/ej2-base/styles/material.css";
 import "../../../../node_modules/@syncfusion/ej2-buttons/styles/material.css";
@@ -46,7 +49,6 @@ import scheduler from "../../../services/scheduler";
 import Badge from "reactstrap/lib/Badge";
 import Form from "reactstrap/lib/Form";
 import Input from "reactstrap/lib/Input";
-import moment from "moment";
 
 class Scheduler extends React.Component {
   constructor(props) {
@@ -77,6 +79,7 @@ class Scheduler extends React.Component {
           EndTime: "2018-09-03T04:00:00.000Z",
         },
       ],
+      colorCodes: ['#1eb653', '#faea12', '#e83e8c', '#3254eb', '#ca0cdb', '#c14018', '#0fbd99', '#2f353a', '#026112', '#da0704', '#808080']
     };
   }
   resetEvent = (id) => {
@@ -157,44 +160,6 @@ class Scheduler extends React.Component {
     });
   };
 
-  colorCode = (status) => {
-    let color = null;
-    if (status === "0") {
-      color = "#1eb653";
-    }
-    if (status === "1") {
-      color = "#faea12";
-    }
-    if (status === "2") {
-      color = "#e83e8c";
-    }
-    if (status === "3") {
-      color = "#3254eb";
-    }
-    if (status === "4") {
-      color = "#ca0cdb";
-    }
-    if (status === "5") {
-      color = "#c14018";
-    }
-    if (status === "6") {
-      color = "#0fbd99";
-    }
-    if (status === "7") {
-      color = "#2f353a";
-    }
-    if (status === "8") {
-      color = "#026112";
-    }
-    if (status === "9") {
-      color = "#da0704";
-    }
-    if (status === "10") {
-      color = "#808080";
-    }
-    return color;
-  };
-
   getEvents = (id) => {
     this.setState({ eventLoader: true, activeLocation: id });
     scheduler
@@ -208,19 +173,17 @@ class Scheduler extends React.Component {
       .then((response) => {
         if (response.data.success) {
           let events = [];
-          response.data.cases.map((c) => {
+          response.data.cases.forEach(c => {
             events.push({
               Id: c.id,
               Subject: common.getFullName(c.patient),
-              StartTime: new Date(
-                c.appointment_date + " " + c["slot"].from_time
-              ),
-              EndTime: new Date(c.appointment_date + " " + c["slot"].to_time),
-              CategoryColor: this.colorCode(c.status),
+              StartTime: moment(c.appointment_date + " " + c["slot"].from_time).format(),
+              EndTime: new moment(c.appointment_date + " " + c["slot"].to_time).format(),
+              CategoryColor: this.state.colorCodes[c.status],
             });
           });
 
-          response.data.blocked.map((c) => {
+          response.data.blocked.forEach(c => {
             events.push({
               Id: c.id,
               Subject: c.subject,
@@ -430,7 +393,7 @@ class Scheduler extends React.Component {
         </Row>
         <Row>
           <Col sm={2}>
-            <div style={{position:'fixed'}}>
+            <div style={{ position: 'fixed' }}>
               <div>
                 <h5 className="m-b-15">Draggable Event</h5>
                 <span>

@@ -34,27 +34,27 @@ class Service extends Component {
         >
           <td>{record.id}</td>
           <td>{record.name}</td>
-          <td>{record.parent_id !== "0" && record.parent.name}</td>
-          <td>{record.parent_id !== "0" && record.code}</td>
+          <td>{record.parent !== null && record.parent.name}</td>
+          <td>{record.parent !== null && record.code}</td>
           <td>
-            {record.parent_id !== "0" &&
+            {record.parent !== null &&
               record.status &&
               record.status === "Y" &&
               `$`}
-            {record.parent_id !== "0" && `${common.numberFormat(record.price)}`}
+            {record.parent !== null && `${common.numberFormat(record.price)}`}
           </td>
           {/* <td>{record.ada_code ? record.ada_code : "---"}</td>
           <td>{record.cpt_code ? record.cpt_code : "---"}</td> */}
           <td>
-            {record.parent_id !== "0" &&
+            {record.parent !== null &&
               record.status &&
               record.status === "Y" && <Badge color="success">Active</Badge>}
-            {record.parent_id !== "0" &&
+            {record.parent !== null &&
               record.status &&
               record.status === "N" && <Badge color="danger">Inactive</Badge>}
           </td>
           <td>
-            {record.parent_id !== "0" && (
+            {record.parent !== null && (
               <button
                 type="button"
                 className="btn btn-warning btn-sm"

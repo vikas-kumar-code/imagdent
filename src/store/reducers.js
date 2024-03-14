@@ -2,24 +2,25 @@ import { LOGIN, LOGOUT } from "./constants";
 
 let apiUrl;
 let baseUrl;
-if (document.URL.indexOf("mitiztechnologies") >= 0 || document.URL.indexOf("localhost") >= 0) {
-  apiUrl = "http://imagdent.mitiztechnologies.in/api";
-  baseUrl = "http://imagdent.mitiztechnologies.in";
-  if (document.URL.indexOf("https") === 0) {
-    apiUrl = "https://imagdent.mitiztechnologies.in/api";
-    baseUrl = "https://imagdent.mitiztechnologies.in";
-  }
+if (document.URL.indexOf("mitiztechnologies") >= 0) {
+  apiUrl = "https://imagdentdev.mitiztechnologies.in/api";
+  baseUrl = "https://imagdentdev.mitiztechnologies.in";
+}
+else if (document.URL.indexOf("localhost") >= 0) {
+  apiUrl = "http://localhost:8888/imagdent";
+  apiUrl = baseUrl;
 }
 else {
   apiUrl = "http://imagdent.com/api";
-  baseUrl = "http://imagdent.com";
   if (document.URL.indexOf("https") === 0) {
     apiUrl = "https://imagdent.com/api";
-    baseUrl = "https://imagdent.com";
+    apiUrl = "https://imagdent.com";
+  }
+  else {
+    apiUrl = "http://imagdent.com/api";
+    apiUrl = "http://imagdent.com";
   }
 }
-apiUrl = "https://imagdent.com/api";
-baseUrl = "https://imagdent.com";
 
 let initialState = {
   apiUrl: apiUrl,

@@ -205,8 +205,8 @@ class Services extends Component {
             <Card>
               <CardHeader>
                 <Row>
-                  <Col md={4} sm={12}><h3>Services</h3></Col>
-                  <Col md={8} sm={12} className="text-right">
+                  <Col md={3} sm={12}><h3>Services</h3></Col>
+                  <Col md={9} sm={12} className="text-right">
                     <Row>
                       <Col sm={12} md={4}>
                         <Button
