@@ -145,8 +145,8 @@ class SchedulerController extends Controller
                 $caseToRenderInCalendar[] = [
                     'Id' => $f['id'],
                     'Subject' => Yii::$app->common->getFullName($f['patient']),
-                    'StartTime' => $startTime->format('Y-m-d H:i a'),
-                    'EndTime' => $endTime->format('Y-m-d H:i a'),
+                    'StartTime' => $startTime->format('Y-m-d H:i'),
+                    'EndTime' => $endTime->format('Y-m-d H:i'),
                     'CategoryColor' => Yii::$app->params['colorCode'][$f['status']]
                 ];
             }
@@ -158,7 +158,7 @@ class SchedulerController extends Controller
             $caseToRenderInCalendar[] = [
                 'Id' => $b['id'],
                 'Subject' => $b['subject'],
-                'StartTime' => $startTime->format('Y-m-d H:i a'),
+                'StartTime' => $startTime->format('Y-m-d H:i'),
                 'EndTime' => $endTime->format('Y-m-d H:i a'),
                 'CategoryColor' => '#808080',
                 'type' => 'blocked'
