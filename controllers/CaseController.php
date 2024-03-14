@@ -404,7 +404,7 @@ class CaseController extends Controller
                             $dmodel = new \app\models\Documents;
                             $dmodel->user_id = 0;
                             $dmodel->clinic_id = 0;
-                            $dmodel->patient_id = (int)$POST['Cases']['patient_id'];
+                            $dmodel->patient_id = (int) $POST['Cases']['patient_id'];
                             $dmodel->case_id = $model->id;
                             $dmodel->case_file = 0;
                             $dmodel->document_type_id = "0";
@@ -590,10 +590,12 @@ class CaseController extends Controller
 
         $model = new \app\models\Cases;
         $query = $model->find()->joinWith([
-            'patient', 'user' => function ($q) {
+            'patient',
+            'user' => function ($q) {
                 $q->select(Yii::$app->params['user_table_select_columns_new']);
             },
-            'clinic', 'location'
+            'clinic',
+            'location'
         ]);
         if (!in_array(Yii::$app->user->identity->role_id, Yii::$app->params['imd_roles'])) {
             $query->andWhere([
@@ -679,12 +681,24 @@ class CaseController extends Controller
             try {
                 $model = new \app\models\Cases;
                 $find = $model->find()->joinWith([
-                    'patient.statedetails ps', 'user u' => function ($q) {
+                    'patient.statedetails ps',
+                    'user u' => function ($q) {
                         $q->select(Yii::$app->params['user_table_select_columns_new']);
                     },
-                    'user.bstate us', 'clinic.statedetails', 'location.state as ls', 'caseServices.service', 'slot', 'documents' => function ($q) {
+                    'user.bstate us',
+                    'clinic.statedetails',
+                    'location.state as ls',
+                    'caseServices.service',
+                    'slot',
+                    'documents' => function ($q) {
                         $q->orderBy(['documents.id' => SORT_ASC]);
-                    }, 'documents.uploadedby ub', 'team.user', 'notes.addedby n', 'invoices', 'invoices.payments pi', 'logs.addedby ab'
+                    },
+                    'documents.uploadedby ub',
+                    'team.user',
+                    'notes.addedby n',
+                    'invoices',
+                    'invoices.payments pi',
+                    'logs.addedby ab'
                 ])->where(['cases.id' => $id])->asArray()->one();
                 //=>function($query){$query->where(['invoices.status'=>1]);
 
@@ -813,12 +827,12 @@ class CaseController extends Controller
                         $cmodel->save();
                         $ifind = \app\models\Invoices::find()->where(['case_id' => $POST['case_id']])->andWhere(['IS NOT', 'user_id', null])->one();
                         //echo $ifind->createCommand()->getRawSql();die;
-                        if($ifind){
+                        if ($ifind) {
                             $ifind->user_id = $teamArr[0];
                             $ifind->save();
                         }
                         $pfind = \app\models\Payments::find()->where(['case_id' => $POST['case_id']])->andWhere(['IS NOT', 'user_id', null])->one();
-                        if($pfind){
+                        if ($pfind) {
                             $pfind->user_id = $teamArr[0];
                             $pfind->save();
                         }
@@ -883,7 +897,9 @@ class CaseController extends Controller
             if (!empty($files)) {
                 \app\models\Documents::deleteAll(
                     [
-                        'and', 'case_id = :case_id', 'case_file = :case_file',
+                        'and',
+                        'case_id = :case_id',
+                        'case_file = :case_file',
                         ['not in', 'document_name', $files],
                     ],
                     [':case_id' => $_POST['caseId'], ':case_file' => $_POST['case_file']]
@@ -974,12 +990,12 @@ class CaseController extends Controller
                         $tfind->save();
                     }
                     $ifind = \app\models\Invoices::find()->where(['case_id' => $POST['Cases']['case_id']])->andWhere(['IS NOT', 'user_id', null])->one();
-                    if($ifind){
+                    if ($ifind) {
                         $ifind->user_id = $POST['Cases']['user_id']['value'];
                         $ifind->save();
                     }
                     $pfind = \app\models\Payments::find()->where(['case_id' => $POST['Cases']['case_id']])->andWhere(['IS NOT', 'user_id', null])->one();
-                    if($pfind){
+                    if ($pfind) {
                         $pfind->user_id = $POST['Cases']['user_id']['value'];
                         $pfind->save();
                     }
@@ -1020,7 +1036,8 @@ class CaseController extends Controller
                 $find = $model->find()->joinWith([
                     'user u' => function ($q) {
                         $q->select(Yii::$app->params['user_table_select_columns_new']);
-                    }, 'caseServices.service'
+                    },
+                    'caseServices.service'
                 ])->where(['cases.id' => $case_id])->one();
 
                 if ($find) {
@@ -1096,8 +1113,8 @@ class CaseController extends Controller
                 // 'to' => "opnsrc.devlpr@gmail.com",
                 'to' => $doctorEmail,
                 'cc' => $ccEmailArr,
-                'body' =>  $template,
-                'notes' =>  $_POST['fields']['notes'],
+                'body' => $template,
+                'notes' => $_POST['fields']['notes'],
                 'subject' => $template->subject,
             ];
             if (Yii::$app->common->sendEmail($data)) {
@@ -1260,20 +1277,20 @@ class CaseController extends Controller
                 }
                 //echo $ifind->createCommand()->getRawSql();die;
                 if ($ifind) {
-                    if ($ifind->balance_amount >= (float)$POST['Payments']['amount']) {
+                    if ($ifind->balance_amount >= (float) $POST['Payments']['amount']) {
                         $model->case_id = $ifind->case_id;
                         $model->paid_amount = (float) $POST['Payments']['amount'];
-                        $model->remaining_amount = $ifind->balance_amount - (float)$POST['Payments']['amount'];
+                        $model->remaining_amount = $ifind->balance_amount - (float) $POST['Payments']['amount'];
                         $model->invoice_id = $ifind->id;
                         $model->location_id = $ifind->location_id;
                         $model->actual_invoice_id = $ifind->invoice_id;
                         $model->user_id = $ifind->user_id;
                         $model->patient_id = $ifind->patient_id;
-                        $model->mode = (int)$POST['Payments']['mode'];
+                        $model->mode = (int) $POST['Payments']['mode'];
                         if ($model->mode == 1) {
                             $model->cheque_number = $POST['Payments']['cheque_number'];
                         }
-                        $model->manual =  $POST['Payments']['manual'];
+                        $model->manual = $POST['Payments']['manual'];
                         $model->received_by = $POST['Payments']['received_by'];
 
                         // mode 6 is for 0 amount. 
@@ -1300,14 +1317,14 @@ class CaseController extends Controller
                                 $conn = new \BridgeCommConnection();
                                 $response = $conn->processRequest("https://rhuat.bridgepaynetsecuretest.com/paymentservice/requesthandler.svc", $request);
                                 $tmodel = new \app\models\Transactions;
-                                $transactions['Transactions'] = (array)$response->responseMessage;
+                                $transactions['Transactions'] = (array) $response->responseMessage;
                                 $transactions['Transactions']['TransactionID'] = $response->TransactionID;
                                 $transactions['Transactions']['RequestType'] = $response->RequestType;
                                 $transactions['Transactions']['ResponseCode'] = $response->ResponseCode;
                                 $transactions['Transactions']['ResponseDescription'] = $response->ResponseDescription;
                                 if ($tmodel->load($transactions) && $tmodel->save()) {
                                     if ($model->save()) {
-                                        $ifind->balance_amount = $ifind->balance_amount - (float)$POST['Payments']['amount'];
+                                        $ifind->balance_amount = $ifind->balance_amount - (float) $POST['Payments']['amount'];
                                         if ($ifind->balance_amount == 0) {
                                             $ifind->status = 1;
                                         }
@@ -1328,7 +1345,7 @@ class CaseController extends Controller
                             }
                         } else if ($model->load($POST) && $model->validate()) {
                             $model->save();
-                            $ifind->balance_amount = $ifind->balance_amount - (float)$POST['Payments']['amount'];
+                            $ifind->balance_amount = $ifind->balance_amount - (float) $POST['Payments']['amount'];
                             if ($ifind->balance_amount == 0) {
                                 $ifind->status = 1;
                             }

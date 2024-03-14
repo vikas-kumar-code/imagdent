@@ -14,7 +14,8 @@
 ]; */
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=localhost;dbname=imagdentdev',
+    //'dsn' => 'mysql:host=127.0.0.1;port=3307;dbname=imagdent',
+    'dsn' => 'mysql:host=localhost;dbname=imagdent',
     'username' => 'root',
     'password' => '',
     'charset' => 'utf8',
