@@ -27,10 +27,7 @@ import {
   Day,
   Week,
   Month,
-  Resize,
-  EventSettingsModel,
-  DataManager,
-  WebApiAdaptor
+  Resize
 } from "@syncfusion/ej2-react-schedule";
 import moment from "moment";
 
@@ -161,6 +158,7 @@ class Scheduler extends React.Component {
   };
 
   getEvents = (id) => {
+    let events = [];
     this.setState({ eventLoader: true, activeLocation: id });
     scheduler
       .getCaseList({
@@ -172,27 +170,47 @@ class Scheduler extends React.Component {
       })
       .then((response) => {
         if (response.data.success) {
-          let events = [];
+
           response.data.cases.forEach(c => {
             events.push({
               Id: c.id,
               Subject: common.getFullName(c.patient),
-              StartTime: moment(c.appointment_date + " " + c["slot"].from_time).format(),
-              EndTime: new moment(c.appointment_date + " " + c["slot"].to_time).format(),
+              StartTime: new Date(c.appointment_date + " " + c["slot"].from_time),
+              EndTime: new Date(c.appointment_date + " " + c["slot"].to_time),
               CategoryColor: this.state.colorCodes[c.status],
             });
           });
 
-          response.data.blocked.forEach(c => {
+          response.data.blocked.forEach(b => {
             events.push({
-              Id: c.id,
-              Subject: c.subject,
-              StartTime: new Date(c.appointment_date + " " + c.from_time),
-              EndTime: new Date(c.appointment_date + " " + c.to_time),
+              Id: b.id,
+              Subject: b.subject,
+              StartTime: new Date(b.appointment_date + " " + b.from_time),
+              EndTime: new Date(b.appointment_date + " " + b.to_time),
               CategoryColor: "#808080",
               type: "blocked",
             });
           });
+          /* events.push(
+            {
+              Id: 1,
+              Subject: "New Year",
+              StartTime: new Date("2024-03-12 09:00"),
+              EndTime: new Date("2024-03-12 09:30"),
+            },
+            {
+              Id: 2,
+              Subject: "May Day",
+              StartTime: new Date("2024-03-15 11:00"),
+              EndTime: new Date("2024-03-15 11:30"),
+            },
+            {
+              Id: 3,
+              Subject: "Bering Sea Gold",
+              StartTime: new Date("2024-03-16 14:00"),
+              EndTime: new Date("2024-03-16 14:30"),
+            }
+          ) */
           this.setState({ data: events });
         }
         this.setState({ eventLoader: false });
