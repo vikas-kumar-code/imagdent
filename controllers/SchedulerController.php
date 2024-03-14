@@ -66,14 +66,23 @@ class SchedulerController extends Controller
         $models = new \app\models\UnAvailability;
         //get list from cases table
         $query = $model->find()->joinWith([
-            'patient', 'user' => function ($q) {
+            'patient',
+            'user' => function ($q) {
                 $q->select(Yii::$app->params['user_table_select_columns_new']);
             },
-            'clinic', 'location', 'slot'
-        ])->where(['IS NOT', 'appointment_date', NULL])->andWhere(['NOT',['cases.status'=> [9]]]);
+            'clinic',
+            'location',
+            'slot'
+        ])->where(['IS NOT', 'appointment_date', NULL])->andWhere(['!=', 'cases.status', 9]);
         if (!in_array(Yii::$app->user->identity->role_id, Yii::$app->params['imd_roles'])) {
             $query->andWhere(['cases.user_id' => Yii::$app->user->identity->id]);
         }
+        $schedule = $models->find()->joinWith([
+            'user' => function ($q) {
+                $q->select(Yii::$app->params['user_table_select_columns_new']);
+            },
+            'location'
+        ])->where(['!=', 'appointment_date', 'NULL'])->andWhere(['!=', 'from_time', 'NULL'])->andWhere(['!=', 'to_time', 'NULL']);
 
         $search = new \app\models\SearchForm;
         $GET['SearchForm'] = isset($_GET['fields']) ? json_decode($_GET['fields'], true) : [];
@@ -87,22 +96,25 @@ class SchedulerController extends Controller
                 $day = date('d', strtotime($search->currentDate));
                 $yearWeek = date('oW', strtotime($search->currentDate));
                 if ($search->view == 'Day') {
-                    $query->andWhere(['YEAR(appointment_date)' => $year])->andWhere(['MONTH(appointment_date)' => $month])->andWhere(['DAY(appointment_date)' => $day]);
+                    //$query->andWhere(['YEAR(appointment_date)' => $year])->andWhere(['MONTH(appointment_date)' => $month])->andWhere(['DAY(appointment_date)' => $day]);
+                    $query->andWhere(['appointment_date' => $search->currentDate]);
+                    $schedule->andWhere(['appointment_date' => $search->currentDate]);
+
                 }
                 if ($search->view == 'Week') {
                     $query->andWhere(['YEARWEEK(appointment_date)' => $yearWeek]);
+                    $schedule->andWhere(['YEARWEEK(appointment_date)' => $yearWeek]);
                 }
                 if ($search->view == 'Month') {
                     $query->andWhere(['YEAR(appointment_date)' => $year])->andWhere(['MONTH(appointment_date)' => $month]);
+                    $schedule->andWhere(['YEAR(appointment_date)' => $year])->andWhere(['MONTH(appointment_date)' => $month]);
                 }
             }
         }
         $find = $query->asArray()->all();
-        //echo $query->createCommand()->getRawSql();die;
+        //echo $schedule->createCommand()->getRawSql(); die;
         //get list from un availability table
-        $schedule = $models->find()->joinWith(['user' => function ($q) {
-            $q->select(Yii::$app->params['user_table_select_columns_new']);
-        }, 'location'])->where(['!=', 'appointment_date', 'NULL'])->andWhere(['!=', 'from_time', 'NULL'])->andWhere(['!=', 'to_time', 'NULL']);
+
         if (!in_array(Yii::$app->user->identity->role_id, Yii::$app->params['imd_roles'])) {
             $schedule->andWhere(['un_availability.user_id' => Yii::$app->user->identity->id]);
         }
@@ -114,8 +126,8 @@ class SchedulerController extends Controller
         }
         $blocked = $schedule->asArray()->all();
         $newFind = [];
-        foreach($find as $f){
-            if(isset($f['slot']) && is_array($f['slot'])){
+        foreach ($find as $f) {
+            if (isset($f['slot']) && is_array($f['slot'])) {
                 $newFind[] = $f;
             }
         }
@@ -124,6 +136,41 @@ class SchedulerController extends Controller
             'cases' => $newFind,
             'blocked' => $blocked,
         ];
+        /* $caseToRenderInCalendar = [];
+        foreach ($find as $f) {
+            if (isset($f['slot']) && is_array($f['slot'])) {
+                Yii::$app->formatter->locale = 'en-US';
+                $startTime = new \DateTime($f['appointment_date'] . " " . $f['slot']['from_time']);
+                $endTime = new \DateTime($f['appointment_date'] . " " . $f['slot']['to_time']);
+                $caseToRenderInCalendar[] = [
+                    'Id' => $f['id'],
+                    'Subject' => Yii::$app->common->getFullName($f['patient']),
+                    'StartTime' => $startTime->format('Y-m-d H:i a'),
+                    'EndTime' => $endTime->format('Y-m-d H:i a'),
+                    'CategoryColor' => Yii::$app->params['colorCode'][$f['status']]
+                ];
+            }
+        }
+        foreach ($blocked as $b) {
+            Yii::$app->formatter->locale = 'en-US';
+            $startTime = new \DateTime($b['appointment_date'] . " " . $b['from_time']);
+            $endTime = new \DateTime($b['appointment_date'] . " " . $b['to_time']);
+            $caseToRenderInCalendar[] = [
+                'Id' => $b['id'],
+                'Subject' => $b['subject'],
+                'StartTime' => $startTime->format('Y-m-d H:i a'),
+                'EndTime' => $endTime->format('Y-m-d H:i a'),
+                'CategoryColor' => '#808080',
+                'type' => 'blocked'
+            ];
+        }
+
+        $response = [
+            'success' => true,
+            'cases' => $caseToRenderInCalendar,
+            //'cases' => json_decode(file_get_contents("https://services.syncfusion.com/react/production/api/schedule")),
+            'blocked' => $blocked,
+        ]; */
         return $response;
     }
 
@@ -133,7 +180,7 @@ class SchedulerController extends Controller
         if (isset($_POST) && !empty($_POST)) {
             $scenario = [];
             $transaction = \Yii::$app->db->beginTransaction();
-             try {
+            try {
                 $model = new \app\models\UnAvailability;
                 $POST['UnAvailability'] = $_POST['fields'];
                 $POST['UnAvailability']['user_id'] = Yii::$app->user->identity->id;
@@ -160,9 +207,10 @@ class SchedulerController extends Controller
                                     if (date('H:i', strtotime($case_dtl->slot->from_time)) == $POST['UnAvailability']['from_time']) {
                                         $transaction->rollBack();
                                         return [
-                                            'error' => true, 'message' => 'Start time already exists on Date ' . $POST['UnAvailability']['appointment_date'],
+                                            'error' => true,
+                                            'message' => 'Start time already exists on Date ' . $POST['UnAvailability']['appointment_date'],
                                         ];
-                                    } 
+                                    }
                                 }
                             }
                             if ($find->save()) {
@@ -177,11 +225,12 @@ class SchedulerController extends Controller
                                 if (date('H:i', strtotime($exist_dtl->from_time)) == $POST['UnAvailability']['from_time']) {
                                     $transaction->rollBack();
                                     return [
-                                        'error' => true, 'message' => 'Start time already exists on Date ' . $POST['UnAvailability']['appointment_date'],
+                                        'error' => true,
+                                        'message' => 'Start time already exists on Date ' . $POST['UnAvailability']['appointment_date'],
                                     ];
                                 } else {
                                     if (date('H:i', strtotime($exist_dtl->from_time)) != $POST['UnAvailability']['from_time'] && date('H:i', strtotime($exist_dtl->from_time)) < $POST['UnAvailability']['from_time']) {
-                                        $time_ranges  = [];
+                                        $time_ranges = [];
                                         $format = 'H:i';
                                         $step = 900;
                                         $first_time = date('H:i', strtotime($exist_dtl->from_time));
@@ -212,7 +261,7 @@ class SchedulerController extends Controller
                                             ];
                                         }
                                     } else if (date('H:i', strtotime($exist_dtl->from_time)) > $POST['UnAvailability']['from_time']) {
-                                        $time_ranges  = [];
+                                        $time_ranges = [];
                                         $format = 'H:i';
                                         $step = 900;
                                         $first_time = date('H:i', strtotime($exist_dtl->from_time));//10:30
@@ -274,9 +323,10 @@ class SchedulerController extends Controller
                             if (!empty($POST['UnAvailability']['from_time']) && !empty($POST['UnAvailability']['to_time'])) {
                                 if ($case_dtl->slot != null && date('H:i', strtotime($case_dtl->slot->from_time)) == $POST['UnAvailability']['from_time']) {
                                     return [
-                                        'error' => true, 'message' => 'Start time already occupied for the ' . $POST['UnAvailability']['appointment_date'],
+                                        'error' => true,
+                                        'message' => 'Start time already occupied for the ' . $POST['UnAvailability']['appointment_date'],
                                     ];
-                                } 
+                                }
                             }
                         }
                         if ($model->save()) {
@@ -290,11 +340,12 @@ class SchedulerController extends Controller
                         foreach ($exist_dtls as $exist_dtl) {
                             if (date('H:i', strtotime($exist_dtl->from_time)) == $POST['UnAvailability']['from_time']) {
                                 return [
-                                    'error' => true, 'message' => 'Start time already exists on Date ' . $POST['UnAvailability']['appointment_date'],
+                                    'error' => true,
+                                    'message' => 'Start time already exists on Date ' . $POST['UnAvailability']['appointment_date'],
                                 ];
                             } else {
                                 if (date('H:i', strtotime($exist_dtl->from_time)) != $POST['UnAvailability']['from_time']) {
-                                    $time_ranges  = [];
+                                    $time_ranges = [];
                                     $format = 'H:i';
                                     $step = 900;
                                     $first_time = date('H:i', strtotime($exist_dtl->from_time));
@@ -310,7 +361,7 @@ class SchedulerController extends Controller
 
                                         $time_ranges[] = $date->format($format);
                                     }
-                                    
+
                                     if (in_array($POST['UnAvailability']['from_time'], $time_ranges)) {
                                         return [
                                             'error' => true,
@@ -324,7 +375,7 @@ class SchedulerController extends Controller
                                         ];
                                     }
                                 } else if (date('H:i', strtotime($exist_dtl->from_time)) > $POST['UnAvailability']['from_time']) {
-                                    $time_ranges  = [];
+                                    $time_ranges = [];
                                     $format = 'H:i';
                                     $step = 900;
                                     $first_time = date('H:i', strtotime($exist_dtl->from_time));
@@ -399,9 +450,11 @@ class SchedulerController extends Controller
     {
         $response = [];
         $model = new \app\models\UnAvailability;
-        $query = $model->find()->joinWith(['user' => function ($q) {
-            $q->select(Yii::$app->params['user_table_select_columns_new']);
-        }])->where(['!=', 'appointment_date', 'NULL']);
+        $query = $model->find()->joinWith([
+            'user' => function ($q) {
+                $q->select(Yii::$app->params['user_table_select_columns_new']);
+            }
+        ])->where(['!=', 'appointment_date', 'NULL']);
         if (Yii::$app->user->identity->role_id != 1) {
             $query->andWhere(['un_availability.user_id' => Yii::$app->user->identity->id]);
         }
