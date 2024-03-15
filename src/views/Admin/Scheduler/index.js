@@ -158,6 +158,11 @@ class Scheduler extends React.Component {
   };
 
   getEvents = (id) => {
+    /* if (this.state.currentView === 'Week') {
+      this.setState({ eventLoader: false });
+      return false;
+    } */
+
     let events = [];
     this.setState({ eventLoader: true, activeLocation: id });
     scheduler
@@ -170,23 +175,29 @@ class Scheduler extends React.Component {
       })
       .then((response) => {
         if (response.data.success) {
-
           response.data.cases.forEach(c => {
             events.push({
+              Id: c.id,
+              Subject: common.getFullName(c.patient),
+              StartTime: moment(new Date(c.appointment_date + " " + c["slot"].from_time)).format("YYYY-MM-DD H:mm"),
+              EndTime: moment(new Date(c.appointment_date + " " + c["slot"].to_time)).format("YYYY-MM-DD H:mm"),
+              CategoryColor: this.state.colorCodes[c.status],
+            });
+            /* events.push({
               Id: c.id,
               Subject: common.getFullName(c.patient),
               StartTime: new Date(c.appointment_date + " " + c["slot"].from_time),
               EndTime: new Date(c.appointment_date + " " + c["slot"].to_time),
               CategoryColor: this.state.colorCodes[c.status],
-            });
+            }); */
           });
 
           response.data.blocked.forEach(b => {
             events.push({
               Id: b.id,
               Subject: b.subject,
-              StartTime: new Date(b.appointment_date + " " + b.from_time),
-              EndTime: new Date(b.appointment_date + " " + b.to_time),
+              StartTime: moment(new Date(b.appointment_date + " " + b.from_time)).format("YYYY-MM-DD H:mm"),
+              EndTime: moment(new Date(b.appointment_date + " " + b.to_time)).format("YYYY-MM-DD H:mm"),
               CategoryColor: "#808080",
               type: "blocked",
             });
