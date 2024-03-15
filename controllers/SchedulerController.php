@@ -93,8 +93,7 @@ class SchedulerController extends Controller
             if (!empty($search->currentDate) && !empty($search->view)) {
                 $year = date('Y', strtotime($search->currentDate));
                 $month = date('m', strtotime($search->currentDate));
-                $day = date('d', strtotime($search->currentDate));
-                $yearWeek = date('oW', strtotime($search->currentDate));
+                $weekStartEndDateArr = Yii::$app->common->getWeekStartEndDatesByDate($search->currentDate);
                 if ($search->view == 'Day') {
                     //$query->andWhere(['YEAR(appointment_date)' => $year])->andWhere(['MONTH(appointment_date)' => $month])->andWhere(['DAY(appointment_date)' => $day]);
                     $query->andWhere(['appointment_date' => $search->currentDate]);
@@ -102,8 +101,16 @@ class SchedulerController extends Controller
 
                 }
                 if ($search->view == 'Week') {
-                    $query->andWhere(['YEARWEEK(appointment_date)' => $yearWeek]);
-                    $schedule->andWhere(['YEARWEEK(appointment_date)' => $yearWeek]);
+                    $query->andWhere([
+                        'AND',
+                        ['>=', 'appointment_date', $weekStartEndDateArr['start']],
+                        ['<=', 'appointment_date', $weekStartEndDateArr['end']],
+                    ]);
+                    $schedule->andWhere([
+                        'AND',
+                        ['>=', 'appointment_date', $weekStartEndDateArr['start']],
+                        ['<=', 'appointment_date', $weekStartEndDateArr['end']],
+                    ]);
                 }
                 if ($search->view == 'Month') {
                     $query->andWhere(['YEAR(appointment_date)' => $year])->andWhere(['MONTH(appointment_date)' => $month]);
@@ -111,8 +118,9 @@ class SchedulerController extends Controller
                 }
             }
         }
+        //$cq = $query->createCommand()->getRawSql();
         $find = $query->asArray()->all();
-        //echo $schedule->createCommand()->getRawSql(); die;
+        //$sq = $schedule->createCommand()->getRawSql();
         //get list from un availability table
 
         if (!in_array(Yii::$app->user->identity->role_id, Yii::$app->params['imd_roles'])) {
@@ -135,6 +143,8 @@ class SchedulerController extends Controller
             'success' => true,
             'cases' => $newFind,
             'blocked' => $blocked,
+            /* 'sq' => $sq,
+            'cq' => $cq */
         ];
         /* $caseToRenderInCalendar = [];
         foreach ($find as $f) {

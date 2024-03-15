@@ -302,4 +302,18 @@ class Common extends Component
     //         return $result;
     //     }
     // }
+
+    function getWeekStartEndDatesByDate($current_date)
+    {
+        $week = date('W', strtotime($current_date));
+        $year = date('Y', strtotime($current_date));
+        return $this->getWeekStartEndDatesByWeekAndYear($week, $year);
+    }
+    function getWeekStartEndDatesByWeekAndYear($week, $year)
+    {
+        $dto = new \DateTime();
+        $result['start'] = $dto->setISODate($year, $week, 0)->format('Y-m-d');
+        $result['end'] = $dto->setISODate($year, $week, 6)->format('Y-m-d');
+        return $result;
+    }
 }
