@@ -10,35 +10,35 @@ import store from "./store/store";
 import common from "./services/common";
 
 
-let inactivityTime = function() {
+let inactivityTime = function () {
   let versioncode = "3"
   let time;
   window.onload = resetTimer;
   document.onmousemove = resetTimer;
   document.onkeypress = resetTimer;
   function logout() {
-    common.getBuild().then((res)=>{
-      if(res.data.build.version_code != versioncode)
-      window.location.reload(true);
+    common.getBuild().then((res) => {
+      if (res.data.build.version_code != versioncode)
+        window.location.reload(true);
     })
-    .catch(function (error) {
-      console.log(error);
-    });
-   }
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
   function resetTimer() {
     clearTimeout(time);
     time = setTimeout(logout, 180000)
 
   }
 };
-window.onload = function() {
-  inactivityTime();
+window.onload = function () {
+  //inactivityTime();
 }
 
 
 
 ReactDOM.render(
-  
+
   <Provider store={store}>
     <App />
   </Provider>,
