@@ -4,36 +4,36 @@ import { Table, Card, CardHeader, CardBody } from "reactstrap";
 import { connect } from "react-redux";
 import Document from "./Document";
 import ViewImage from "./ViewImage";
-import { Scrollbars } from "react-custom-scrollbars";
+import { Scrollbar } from "react-scrollbars-custom";
 
 class Documents extends Component {
   state = {
     imageSource: "",
     showModal: false,
-    chooseDocuments: []
+    chooseDocuments: [],
   };
   toggleSubModal = () => {
-    this.setState(prevState => ({
-      showModal: !prevState.showModal
+    this.setState((prevState) => ({
+      showModal: !prevState.showModal,
     }));
   };
-  showImage = e => {
+  showImage = (e) => {
     this.setState({ imageSource: e.target.dataset.src });
     this.toggleSubModal();
   };
   removeDocument = (file_name, case_file) => {
     this.props.removeDocument(file_name, case_file);
   };
-  handleChooseDocument = e => {
+  handleChooseDocument = (e) => {
     let chooseDocuments = this.state.chooseDocuments;
     if (e.target.checked) {
       let indexToBePuhsed = this.props.documents.filter(
-        doc => parseInt(doc.id) === parseInt(e.target.value)
+        (doc) => parseInt(doc.id) === parseInt(e.target.value)
       );
       chooseDocuments.push(indexToBePuhsed[0]);
     } else {
       let docToBeRemoved = this.props.documents.filter(
-        doc => parseInt(doc.id) === parseInt(e.target.value)
+        (doc) => parseInt(doc.id) === parseInt(e.target.value)
       );
       chooseDocuments.splice(docToBeRemoved[0], 1);
     }
@@ -41,9 +41,9 @@ class Documents extends Component {
       this.props.updateSelectedDocuments(chooseDocuments);
     });
   };
-  checkDocument = id => {
+  checkDocument = (id) => {
     let chooseDocuments = this.state.chooseDocuments.filter(
-      doc => parseInt(doc.id) === parseInt(id)
+      (doc) => parseInt(doc.id) === parseInt(id)
     );
     if (chooseDocuments.length > 0) {
       return true;
@@ -63,11 +63,11 @@ class Documents extends Component {
           <strong>{this.props.title}</strong>
         </CardHeader>
         <CardBody>
-          <Scrollbars
-            autoHeight
-            autoHeightMin={100}
-            autoHeightMax={200}
-            autoHide={true}
+          <Scrollbar
+            thumbYProps={{ style: { width: "5px" } }}
+            thumbXProps={{ style: { width: "5px" } }}
+            trackXProps={{ style: { width: "5px" } }}
+            trackYProps={{ style: { width: "5px" } }}
           >
             <Table hover>
               <thead>
@@ -128,7 +128,7 @@ class Documents extends Component {
                     )}
               </tbody>
             </Table>
-          </Scrollbars>
+          </Scrollbar>
         </CardBody>
         {this.state.showModal && (
           <ViewImage
@@ -141,11 +141,11 @@ class Documents extends Component {
     );
   }
 }
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     baseUrl: state.baseUrl,
     apiUrl: state.apiUrl,
-    token: state.token
+    token: state.token,
   };
 };
 export default connect(mapStateToProps)(Documents);

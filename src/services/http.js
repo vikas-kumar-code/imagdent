@@ -2,11 +2,12 @@ import axios from "axios";
 import store from "../store/store";
 import { toast } from "react-toastify";
 let apiUrl;
-if (document.URL.indexOf("mitiztechnologies") >= 0) {
-  apiUrl = "https://imagdentdev.mitiztechnologies.in/api";
-}
-else if (document.URL.indexOf("localhost") >= 0) {
-  apiUrl = "http://localhost:8888/imagdent";
+if (document.URL.indexOf("mitiztechnologies") >= 0 || document.URL.indexOf("localhost") >= 0) {
+  // apiUrl = "http://imagdent.mitiztechnologies.in/api";
+  apiUrl = "http://localhost/imag-dent";
+  if (document.URL.indexOf("https") === 0) {
+    apiUrl = "https://imagdent.mitiztechnologies.in/api";
+  }
 }
 else {
   apiUrl = "http://imagdent.com/api";
