@@ -65,23 +65,24 @@ class PatientController extends Controller
                 $POST['Patients']['Country'] = isset($_POST['fields']['Country']['value']) ? $_POST['fields']['Country']['value'] : NULL;
                 $POST['Patients']['State'] = isset($_POST['fields']['State']['value']) ? $_POST['fields']['State']['value'] : NULL;
                 if (isset($POST['Patients']['coustom_BirthDate']) && !empty($POST['Patients']['coustom_BirthDate'])) {
-                    $POST['Patients']['BirthDate'] =  $POST['Patients']['coustom_BirthDate'];
+                    $POST['Patients']['BirthDate'] = $POST['Patients']['coustom_BirthDate'];
                 }
                 if (isset($POST['Patients']['BirthDate']) && !empty($POST['Patients']['BirthDate'])) {
-                    $date_of_birth = date_create($POST['Patients']['BirthDate']);
+                    /* $date_of_birth = date_create($POST['Patients']['BirthDate']);
                     $current_date = date_create(date("Y-m-d"));
                     $difference = date_diff($current_date, $date_of_birth);
                     if ($difference->y > 0) {
                         $POST['Patients']['Age'] = $difference->y;
-                    }
+                    } */
+                    $POST['Patients']['Age'] = Yii::$app->common->ageCalculator($POST['Patients']['BirthDate']);
                 }
                 if (isset($POST['Patients']['sms_consent_date']) && !empty($POST['Patients']['sms_consent_date'])) {
-                    $POST['Patients']['sms_consent_date'] =  date("Y-m-d", strtotime($POST['Patients']['sms_consent_date']));
+                    $POST['Patients']['sms_consent_date'] = date("Y-m-d", strtotime($POST['Patients']['sms_consent_date']));
                 }
                 if (isset($POST['Patients']['email_consent_date']) && !empty($POST['Patients']['email_consent_date'])) {
-                    $POST['Patients']['email_consent_date'] =  date("Y-m-d", strtotime($POST['Patients']['email_consent_date']));
+                    $POST['Patients']['email_consent_date'] = date("Y-m-d", strtotime($POST['Patients']['email_consent_date']));
                 }
-                $POST['Patients']['added_by'] =  Yii::$app->user->identity->id;
+                $POST['Patients']['added_by'] = Yii::$app->user->identity->id;
                 if (isset($POST['Patients']['id']) && !empty($POST['Patients']['id'])) {
                     $find = $model->find()->where(['id' => $POST['Patients']['id']])->one();
                     if ($find && $find->load($POST)) {
@@ -124,7 +125,8 @@ class PatientController extends Controller
                                 if (!empty($files)) {
                                     \app\models\Documents::deleteAll(
                                         [
-                                            'and', 'patient_id = :patient_id',
+                                            'and',
+                                            'patient_id = :patient_id',
                                             ['not in', 'document_name', $files],
                                         ],
                                         [':patient_id' => $find->id]
@@ -167,7 +169,8 @@ class PatientController extends Controller
                                 if (!empty($notes)) {
                                     \app\models\Notes::deleteAll(
                                         [
-                                            'and', 'patient_id = :patient_id',
+                                            'and',
+                                            'patient_id = :patient_id',
                                             ['not in', 'id', $notes],
                                         ],
                                         [':patient_id' => $find->id]
@@ -321,7 +324,7 @@ class PatientController extends Controller
                 $query->andWhere(['LIKE', 'Zipcode', $search->Zipcode]);
             }
         }
-        
+
         if (!in_array(Yii::$app->user->identity->role_id, Yii::$app->params['imd_roles'])) {
             if (!isset($_GET['getAll'])) {
                 $query->andWhere(['added_by' => Yii::$app->user->identity->id]);
@@ -410,7 +413,7 @@ class PatientController extends Controller
                 $search_fields++;
             }
             if (isset($search->BirthDate) && !empty($search->BirthDate)) {
-                $search->BirthDate =  date("Y-m-d", strtotime($search->BirthDate));
+                $search->BirthDate = date("Y-m-d", strtotime($search->BirthDate));
                 $query->andWhere(['BirthDate' => $search->BirthDate]);
                 $search_fields++;
             }
@@ -494,7 +497,7 @@ class PatientController extends Controller
                 $find = $model->find()->where(['id' => $_POST['id']])->one();
                 $casesmodel = new \app\models\Cases;
                 $checkstatus = $casesmodel->find()->where(['>', 'status', 0])
-                    ->andWhere(['patient_id' =>  $_POST['id']])->count();
+                    ->andWhere(['patient_id' => $_POST['id']])->count();
                 if ($checkstatus > 0) {
                     return [
                         'error' => true,
@@ -502,7 +505,7 @@ class PatientController extends Controller
                     ];
                 } else {
                     if ($find && $find->delete()) {
-                        $casearray = $casesmodel->find()->Where(['patient_id' =>  $_POST['id']])->all();
+                        $casearray = $casesmodel->find()->Where(['patient_id' => $_POST['id']])->all();
                         foreach ($casearray as $case) {
                             \app\models\Cases::deleteAll(['patient_id' => $case->patient_id]);
                             \app\models\CaseServices::deleteAll(['case_id' => $case->id]);
