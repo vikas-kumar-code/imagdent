@@ -215,8 +215,14 @@ class AddEditPatientBody extends Component {
             alert("Save the note or cancel to discard");
           } else {
             this.setState({ submitted: true });
-            let fields = this.state.fields
+            let fields = this.state.fields && JSON.parse(JSON.stringify(this.state.fields));
             fields["coustom_BirthDate"] = moment(fields["BirthDate"]).format(
+              "YYYY-MM-DD"
+            )
+            fields["email_consent_date"] = moment(fields["email_consent_date"]).format(
+              "YYYY-MM-DD"
+            )
+            fields["sms_consent_date"] = moment(fields["sms_consent_date"]).format(
               "YYYY-MM-DD"
             )
             const params = {
@@ -293,6 +299,12 @@ class AddEditPatientBody extends Component {
   };
   handleConsentChange = (field, e) => {
     let fields = this.state.fields;
+    if(field === 'sms_consent' && !e.target.checked){
+      fields['sms_consent_date'] = '';
+    }
+    else if(field === 'email_consent' && !e.target.checked){
+      fields['email_consent_date'] = '';
+    }
     fields[field] = e.target.checked ? 1 : 0;
     this.setState({ fields });
   };
@@ -1152,7 +1164,7 @@ class AddEditPatientBody extends Component {
                                           );
                                         }}
                                         checked={
-                                          fields["sms_consent"] == "1"
+                                          (fields["sms_consent"] == "1" || fields["sms_consent_date"] !== '')
                                             ? true
                                             : false
                                         }
@@ -1202,7 +1214,7 @@ class AddEditPatientBody extends Component {
                                           );
                                         }}
                                         checked={
-                                          fields["email_consent"] == "1"
+                                          (fields["email_consent"] == "1" || fields["email_consent_date"] !== '')
                                             ? true
                                             : false
                                         }
