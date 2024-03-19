@@ -76,10 +76,12 @@ class PatientController extends Controller
                     }
                 }
                 if (isset($POST['Patients']['sms_consent_date']) && !empty($POST['Patients']['sms_consent_date'])) {
-                    $POST['Patients']['sms_consent_date'] =  date("Y-m-d", strtotime($POST['Patients']['sms_consent_date']));
+                    //$POST['Patients']['sms_consent_date'] =  date("Y-m-d", strtotime($POST['Patients']['sms_consent_date']));
+                    $POST['Patients']['sms_consent_date'] =  $POST['Patients']['sms_consent_date'];
                 }
                 if (isset($POST['Patients']['email_consent_date']) && !empty($POST['Patients']['email_consent_date'])) {
-                    $POST['Patients']['email_consent_date'] =  date("Y-m-d", strtotime($POST['Patients']['email_consent_date']));
+                    //$POST['Patients']['email_consent_date'] =  date("Y-m-d", strtotime($POST['Patients']['email_consent_date']));
+                    $POST['Patients']['email_consent_date'] =  $POST['Patients']['email_consent_date'];
                 }
                 $POST['Patients']['added_by'] =  Yii::$app->user->identity->id;
                 if (isset($POST['Patients']['id']) && !empty($POST['Patients']['id'])) {
