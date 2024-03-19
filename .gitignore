@@ -37,8 +37,8 @@ tests/_support/_generated
 
 /config/db.php
 /.htaccess
-/assets
 
+/assets
 !/assets/AdminAsset.php
 !/assets/AppAsset.php
 !/assets/BlankAsset.php
