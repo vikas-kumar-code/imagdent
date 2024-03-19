@@ -316,4 +316,23 @@ class Common extends Component
         $result['end'] = $dto->setISODate($year, $week, 6)->format('Y-m-d');
         return $result;
     }
+
+    /**
+     * Simple PHP age Calculator
+     * 
+     * Calculate and returns age based on the date provided by the user.
+     * @param   date of birth('Format:yyyy-mm-dd').
+     * @return  age based on date of birth
+     */
+    function ageCalculator($dob)
+    {
+        if (!empty($dob)) {
+            $birthdate = new \DateTime($dob);
+            $today = new \DateTime('today');
+            $age = $birthdate->diff($today)->y;
+            return $age;
+        } else {
+            return 0;
+        }
+    }
 }
