@@ -2,15 +2,19 @@ import { LOGIN, LOGOUT } from "./constants";
 
 let apiUrl;
 let baseUrl;
-if (document.URL.indexOf("mitiztechnologies") >= 0) {
-  apiUrl = "https://imagdentdev.mitiztechnologies.in/api";
-  baseUrl = "https://imagdentdev.mitiztechnologies.in";
-}
-else if (document.URL.indexOf("localhost") >= 0) {
-  apiUrl = "http://localhost:8888/imagdent";
-  apiUrl = baseUrl;
-}
-else {
+if (
+  document.URL.indexOf("mitiztechnologies") >= 0 ||
+  document.URL.indexOf("localhost") >= 0
+) {
+  // apiUrl = "http://imagdent.mitiztechnologies.in/api";
+  // baseUrl = "http://imagdent.mitiztechnologies.in";
+  apiUrl = "http://localhost/imag-dent";
+  baseUrl = "http://localhost/imag-dent";
+  if (document.URL.indexOf("https") === 0) {
+    apiUrl = "https://imagdent.mitiztechnologies.in/api";
+    baseUrl = "https://imagdent.mitiztechnologies.in";
+  }
+} else {
   apiUrl = "http://imagdent.com/api";
   if (document.URL.indexOf("https") === 0) {
     apiUrl = "https://imagdent.com/api";
@@ -30,8 +34,8 @@ let initialState = {
   navigation: [],
   searchPatientData: {
     searchFields: {},
-    searchResult: []
-  }
+    searchResult: [],
+  },
 };
 if (localStorage.getItem("token")) {
   initialState = { ...initialState, token: localStorage.getItem("token") };
@@ -39,13 +43,13 @@ if (localStorage.getItem("token")) {
 if (localStorage.getItem("userName")) {
   initialState = {
     ...initialState,
-    userName: localStorage.getItem("userName")
+    userName: localStorage.getItem("userName"),
   };
 }
 if (localStorage.getItem("name")) {
   initialState = {
     ...initialState,
-    name: localStorage.getItem("name")
+    name: localStorage.getItem("name"),
   };
 }
 if (localStorage.getItem("userId")) {
@@ -54,26 +58,26 @@ if (localStorage.getItem("userId")) {
 if (localStorage.getItem("userType")) {
   initialState = {
     ...initialState,
-    userType: localStorage.getItem("userType")
+    userType: localStorage.getItem("userType"),
   };
 }
 if (localStorage.getItem("userImage")) {
   initialState = {
     ...initialState,
-    userImage: localStorage.getItem("userImage")
+    userImage: localStorage.getItem("userImage"),
   };
 }
 
 if (localStorage.getItem("userImageThumb")) {
   initialState = {
     ...initialState,
-    userImageThumb: localStorage.getItem("userImageThumb")
+    userImageThumb: localStorage.getItem("userImageThumb"),
   };
 }
 if (localStorage.getItem("defaultLocation")) {
   initialState = {
     ...initialState,
-    defaultLocation: localStorage.getItem("defaultLocation")
+    defaultLocation: localStorage.getItem("defaultLocation"),
   };
 }
 
@@ -85,7 +89,7 @@ function rootReducer(state = initialState, action) {
     case LOGOUT:
       const initialState = {
         apiUrl: apiUrl,
-        baseUrl: baseUrl
+        baseUrl: baseUrl,
       };
       return (state = initialState);
     case "GET-NAVIGATIONS":

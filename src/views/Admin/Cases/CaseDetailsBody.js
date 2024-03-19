@@ -118,10 +118,10 @@ class CaseDetailsBody extends Component {
           let fields = response.data.case;
           let invoices = response.data.case.invoices;
           let documents = response.data.case.documents.filter(
-            (doc) => doc.case_file === "0"
+            (doc) => parseInt(doc.case_file) === 0
           );
           let files = response.data.case.documents.filter(
-            (doc) => doc.case_file === "1"
+            (doc) => parseInt(doc.case_file) === 1
           );
           fields["invoices"] = response.data.case.invoices;
           let notes = response.data.case.notes;
@@ -129,7 +129,6 @@ class CaseDetailsBody extends Component {
             common
               .getSelectedDiagnosisCodes({ codes: fields["diagnosis_codes"] })
               .then((response) => {
-                console.log(response);
                 let diagnosis_codes = response.data.diagnosis_codes;
                 this.setState({ diagnosis_codes });
               });
@@ -562,7 +561,6 @@ class CaseDetailsBody extends Component {
 
   render() {
     const { fields } = this.state;
-    console.log(this.state.fields);
     if (this.state.error_403) {
       return <Error403 />;
     }

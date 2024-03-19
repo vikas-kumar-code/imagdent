@@ -116,12 +116,12 @@ class AddEditCase extends Component {
           fields,
           dropdownPlaceholder: users.length > 0 ? "Select" : "Record not found",
         });
-      }else{
+      } else {
         if (response.data.error) {
           toast.error(response.data.message, {
             position: toast.POSITION.TOP_RIGHT,
           });
-            this.props.history.push("/admin/dashboard")
+          this.props.history.push("/admin/dashboard");
         }
       }
     });
@@ -157,7 +157,7 @@ class AddEditCase extends Component {
           slotLoader: false,
         });
       });
-  }
+  };
   componentDidMount = () => {
     this.setState({ slotLoader: true });
     common.getLocations().then((response) => {
@@ -188,7 +188,7 @@ class AddEditCase extends Component {
                 this.setState({ services: response.data.services });
               }
             });
-            if (!common.imd_roles.includes((parseInt(this.props.userType)))) {
+            if (!common.imd_roles.includes(parseInt(this.props.userType))) {
               this.getUsers();
             }
           }
@@ -284,20 +284,24 @@ class AddEditCase extends Component {
                 moment(response.data.case.appointment_date)
               );
               this.setState({ slotLoader: true });
-              this.getAvailableSlots()
+              this.getAvailableSlots();
             }
             fields["slot_id"] = response.data.case.slot_id;
             fields["total_price"] = response.data.case.total_price;
             fields["slot"] =
-            response.data.case.slot !== null &&
-            `${moment(response.data.case.slot.from_time, "hh:mm").format("hh:mm A")}
-            ${" - "}${moment(response.data.case.slot.to_time, "hh:mm").format("hh:mm A")}`;
+              response.data.case.slot !== null &&
+              `${moment(response.data.case.slot.from_time, "hh:mm").format(
+                "hh:mm A"
+              )}
+            ${" - "}${moment(response.data.case.slot.to_time, "hh:mm").format(
+                "hh:mm A"
+              )}`;
             fields["referral_note"] =
-              response.data.case &&
-                response.data.case.referral_note ?
-                response.data.case.referral_note : "";
+              response.data.case && response.data.case.referral_note
+                ? response.data.case.referral_note
+                : "";
             this.setState({ fields, oldFields: fields }, () => {
-              this.setTotalPrice()
+              this.setTotalPrice();
             });
           } else if (response.data.error) {
           }
@@ -352,7 +356,8 @@ class AddEditCase extends Component {
     let frm = e.target.attributes.name.value;
     if (this.handleValidation(frm)) {
       this.setState({ submitted: true });
-      let fields = this.state.fields;
+      let fields =
+        this.state.fields && JSON.parse(JSON.stringify(this.state.fields));
       if (fields["appointment_date"] !== "") {
         fields["appointment_date"] = moment(fields["appointment_date"]).format(
           "YYYY-MM-DD"
@@ -361,7 +366,6 @@ class AddEditCase extends Component {
       const params = {
         fields: fields,
       };
-      console.log(params);
       ccase.add(params).then((response) => {
         this.setState({ submitted: false }, () => {
           if (response.data.success) {
@@ -543,7 +547,7 @@ class AddEditCase extends Component {
     let fields = this.state.fields;
     fields["user_id"] = user;
     this.setState({ fields });
-  }
+  };
 
   handleAsyncUserChange = (user) => {
     let fields = this.state.fields;
@@ -580,19 +584,21 @@ class AddEditCase extends Component {
     let fields = this.state.fields;
     fields["clinic_id"] = clinic;
     this.setState({ fields }, () => {
-      common.getAssociatedUsers({ clinic_id: clinic.value }).then(response => {
-        if (response.data.success) {
-          let users = [];
-          response.data.users.forEach((user, index) => {
-            users[index] = {
-              label: common.getFullName(user),
-              value: user.id,
-              email: user.email,
-            };
-          });
-          this.setState({ users })
-        }
-      })
+      common
+        .getAssociatedUsers({ clinic_id: clinic.value })
+        .then((response) => {
+          if (response.data.success) {
+            let users = [];
+            response.data.users.forEach((user, index) => {
+              users[index] = {
+                label: common.getFullName(user),
+                value: user.id,
+                email: user.email,
+              };
+            });
+            this.setState({ users });
+          }
+        });
     });
   };
 
@@ -796,7 +802,7 @@ class AddEditCase extends Component {
     } else {
       fields["slot_id"] = "";
       fields["appointment_date"] = date;
-      this.setState({ fields, slotLoader: true },()=>{
+      this.setState({ fields, slotLoader: true }, () => {
         this.getAvailableSlots();
       });
     }
@@ -880,7 +886,7 @@ class AddEditCase extends Component {
   };
 
   promiseClinicOptions = (inputValue) => {
-    if(this.searchTimeOut > 0){
+    if (this.searchTimeOut > 0) {
       clearTimeout(this.searchTimeOut);
     }
     return new Promise((resolve) => {
@@ -911,7 +917,7 @@ class AddEditCase extends Component {
   };
 
   promiseUserOptions = (inputValue) => {
-    if(this.searchTimeOut > 0){
+    if (this.searchTimeOut > 0) {
       clearTimeout(this.searchTimeOut);
     }
     return new Promise((resolve) => {
@@ -960,7 +966,7 @@ class AddEditCase extends Component {
         searchResult: [],
       },
     });
-  }
+  };
 
   render() {
     const { fields, errors } = this.state;
@@ -972,50 +978,57 @@ class AddEditCase extends Component {
               <ul className="step d-flex flex-nowrap">
                 <li
                   onClick={(e) => this.navigateTab(e, 1)}
-                  className={`${this.state.step === 1 ? "step-item active" : "step-item"
-                    } ${this.state.currentStep > 0 && "hoverPointer"}`}
+                  className={`${
+                    this.state.step === 1 ? "step-item active" : "step-item"
+                  } ${this.state.currentStep > 0 && "hoverPointer"}`}
                 >
                   <span />
                 </li>
                 <li
                   onClick={(e) => this.navigateTab(e, 2)}
-                  className={`${this.state.step === 2 ? "step-item active" : "step-item"
-                    } ${this.state.currentStep > 1 && "hoverPointer"}`}
+                  className={`${
+                    this.state.step === 2 ? "step-item active" : "step-item"
+                  } ${this.state.currentStep > 1 && "hoverPointer"}`}
                 >
                   <span />
                 </li>
                 <li
                   onClick={(e) => this.navigateTab(e, 3)}
-                  className={`${this.state.step === 3 ? "step-item active" : "step-item"
-                    } ${this.state.currentStep > 2 && "hoverPointer"}`}
+                  className={`${
+                    this.state.step === 3 ? "step-item active" : "step-item"
+                  } ${this.state.currentStep > 2 && "hoverPointer"}`}
                 >
                   <span />
                 </li>
                 <li
                   onClick={(e) => this.navigateTab(e, 4)}
-                  className={`${this.state.step === 4 ? "step-item active" : "step-item"
-                    } ${this.state.currentStep > 3 && "hoverPointer"}`}
+                  className={`${
+                    this.state.step === 4 ? "step-item active" : "step-item"
+                  } ${this.state.currentStep > 3 && "hoverPointer"}`}
                 >
                   <span />
                 </li>
                 <li
                   onClick={(e) => this.navigateTab(e, 5)}
-                  className={`${this.state.step === 5 ? "step-item active" : "step-item"
-                    } ${this.state.currentStep > 4 && "hoverPointer"}`}
+                  className={`${
+                    this.state.step === 5 ? "step-item active" : "step-item"
+                  } ${this.state.currentStep > 4 && "hoverPointer"}`}
                 >
                   <span />
                 </li>
                 <li
                   onClick={(e) => this.navigateTab(e, 6)}
-                  className={`${this.state.step === 6 ? "step-item active" : "step-item"
-                    } ${this.state.currentStep > 5 && "hoverPointer"}`}
+                  className={`${
+                    this.state.step === 6 ? "step-item active" : "step-item"
+                  } ${this.state.currentStep > 5 && "hoverPointer"}`}
                 >
                   <span />
                 </li>
                 <li
                   onClick={(e) => this.navigateTab(e, 7)}
-                  className={`${this.state.step === 7 ? "step-item active" : "step-item"
-                    } ${this.state.currentStep > 6 && "hoverPointer"}`}
+                  className={`${
+                    this.state.step === 7 ? "step-item active" : "step-item"
+                  } ${this.state.currentStep > 6 && "hoverPointer"}`}
                 >
                   <span />
                 </li>
@@ -1060,7 +1073,7 @@ class AddEditCase extends Component {
             <FormGroup row>
               <Col md={6}>
                 <Label for="user_id">Choose Doctor</Label>
-                {(common.imd_roles.includes(parseInt(this.props.userType))) ? (
+                {common.imd_roles.includes(parseInt(this.props.userType)) ? (
                   <AsyncSelect
                     cacheOptions
                     name="user_id"
@@ -1098,7 +1111,7 @@ class AddEditCase extends Component {
               </Col>
               <Col md={6}>
                 <Label for="clinic_id">Choose Clinic</Label>
-                {common.imd_roles.includes(parseInt(this.props.userType))  ? (
+                {common.imd_roles.includes(parseInt(this.props.userType)) ? (
                   <AsyncSelect
                     cacheOptions
                     name="clinic_id"
@@ -1333,8 +1346,8 @@ class AddEditCase extends Component {
                           <small>$</small>
                           {this.state.fields["totalPrice"]
                             ? common.numberFormat(
-                              this.state.fields["totalPrice"]
-                            )
+                                this.state.fields["totalPrice"]
+                              )
                             : "0.00"}
                         </span>
                       </CardFooter>
@@ -1411,7 +1424,9 @@ class AddEditCase extends Component {
                     type="textarea"
                     name="referral_note"
                     id="referral_note"
-                    value={fields["referral_note"] ? fields["referral_note"] : ""}
+                    value={
+                      fields["referral_note"] ? fields["referral_note"] : ""
+                    }
                     onChange={this.handleChange}
                     invalid={errors["referral_note"] ? true : false}
                     className="input-bg"
@@ -1463,6 +1478,7 @@ class AddEditCase extends Component {
                       }
                       onChange={this.handleDate}
                       dateFormat="MM-dd-yyyy"
+                      timeFormat="HH:mm"
                       minDate={new Date(moment())}
                       id="appointment_date"
                       disabled={fields["appointment"].disableDate}
@@ -1640,10 +1656,10 @@ class AddEditCase extends Component {
                           <th scope="row">Diagnosis Codes</th>
                           <td>
                             {fields["diagnosis_codes"] &&
-                              fields["diagnosis_codes"].length > 0
+                            fields["diagnosis_codes"].length > 0
                               ? fields["diagnosis_codes"]
-                                .map((code) => code.label)
-                                .join(", ")
+                                  .map((code) => code.label)
+                                  .join(", ")
                               : "N/A"}
                           </td>
                         </tr>
@@ -1660,7 +1676,11 @@ class AddEditCase extends Component {
                         </tr>
                         <tr>
                           <th scope="row">Note</th>
-                          <td>{fields["referral_note"] ? fields["referral_note"] : "N/A"}</td>
+                          <td>
+                            {fields["referral_note"]
+                              ? fields["referral_note"]
+                              : "N/A"}
+                          </td>
                         </tr>
                         <tr>
                           <td colSpan="2">
@@ -1739,10 +1759,10 @@ class AddEditCase extends Component {
                                             "doctor_total_bill"
                                           ]
                                             ? common.numberFormat(
-                                              this.state.fields[
-                                              "doctor_total_bill"
-                                              ]
-                                            )
+                                                this.state.fields[
+                                                  "doctor_total_bill"
+                                                ]
+                                              )
                                             : "0.00"}
                                         </span>
                                       </Col>
@@ -1754,10 +1774,10 @@ class AddEditCase extends Component {
                                             "patient_total_bill"
                                           ]
                                             ? common.numberFormat(
-                                              this.state.fields[
-                                              "patient_total_bill"
-                                              ]
-                                            )
+                                                this.state.fields[
+                                                  "patient_total_bill"
+                                                ]
+                                              )
                                             : "0.00"}
                                         </span>
                                       </Col>
@@ -1770,8 +1790,8 @@ class AddEditCase extends Component {
 
                                       {this.state.fields["total_price"]
                                         ? common.numberFormat(
-                                          this.state.fields["total_price"]
-                                        )
+                                            this.state.fields["total_price"]
+                                          )
                                         : "0.00"}
                                     </span>
                                   </Col>

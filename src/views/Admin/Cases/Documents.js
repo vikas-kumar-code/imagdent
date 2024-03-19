@@ -3,7 +3,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { Table, Card, CardHeader, CardBody } from "reactstrap";
 import { connect } from "react-redux";
 import Document from "./Document";
-import { Scrollbars } from "react-custom-scrollbars";
+import { Scrollbar } from "react-scrollbars-custom";
 
 class Documents extends Component {
   state = {
@@ -30,18 +30,21 @@ class Documents extends Component {
       this.setState({ chooseDocuments: this.props.selectedDocuments });
     }
   };
+
   render() {
+    console.log(this.props.documents);
     return (
       <Card>
         <CardHeader>
           <strong>{this.props.title}</strong>
         </CardHeader>
         <CardBody>
-          <Scrollbars
-            autoHeight
-            autoHeightMin={200}
-            autoHeightMax={300}
-            autoHide={true}
+          <Scrollbar
+            thumbYProps={{ style: {width: "5px"} }}
+            thumbXProps={{ style: {width: "5px"} }}
+            trackXProps={{ style: {width: "5px"} }}
+            trackYProps={{ style: {width: "5px"} }}
+            style={{ width: "100%", height: 300 }}
           >
             <Table hover>
               <thead>
@@ -91,7 +94,7 @@ class Documents extends Component {
                     )}
               </tbody>
             </Table>
-          </Scrollbars>
+          </Scrollbar>
         </CardBody>
       </Card>
     );
