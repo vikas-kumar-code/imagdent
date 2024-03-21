@@ -77,11 +77,18 @@ class PatientController extends Controller
                     $POST['Patients']['Age'] = Yii::$app->common->ageCalculator($POST['Patients']['BirthDate']);
                 }
                 if (isset($POST['Patients']['sms_consent_date']) && !empty($POST['Patients']['sms_consent_date'])) {
-                    $POST['Patients']['sms_consent_date'] = date("Y-m-d", strtotime($POST['Patients']['sms_consent_date']));
+                    //$POST['Patients']['sms_consent_date'] = date("Y-m-d", strtotime($POST['Patients']['sms_consent_date']));
+                    $POST['Patients']['sms_consent_date'] = $POST['Patients']['sms_consent_date'];
+                } else {
+                    $POST['Patients']['sms_consent_date'] = NULL;
                 }
                 if (isset($POST['Patients']['email_consent_date']) && !empty($POST['Patients']['email_consent_date'])) {
-                    $POST['Patients']['email_consent_date'] = date("Y-m-d", strtotime($POST['Patients']['email_consent_date']));
+                    //$POST['Patients']['email_consent_date'] = date("Y-m-d", strtotime($POST['Patients']['email_consent_date']));
+                    $POST['Patients']['email_consent_date'] = $POST['Patients']['email_consent_date'];
+                } else {
+                    $POST['Patients']['email_consent_date'] = NULL;
                 }
+
                 $POST['Patients']['added_by'] = Yii::$app->user->identity->id;
                 if (isset($POST['Patients']['id']) && !empty($POST['Patients']['id'])) {
                     $find = $model->find()->where(['id' => $POST['Patients']['id']])->one();
@@ -181,6 +188,7 @@ class PatientController extends Controller
                             }
                             $transaction->commit();
                             return [
+                                'w' => $POST,
                                 'success' => true,
                                 'message' => 'Patient has been updated successfully.',
                             ];
@@ -327,10 +335,17 @@ class PatientController extends Controller
 
         if (!in_array(Yii::$app->user->identity->role_id, Yii::$app->params['imd_roles'])) {
             if (!isset($_GET['getAll'])) {
-                $query->andWhere(['added_by' => Yii::$app->user->identity->id]);
+                $findAssociatedClinicsArr = explode(',', Yii::$app->user->identity->clinics);
+                $users = [];
+                foreach ($findAssociatedClinicsArr as $clinic) {
+                    $usersArr = \app\models\User::find()->where(new \yii\db\Expression('FIND_IN_SET(' . $clinic . ',clinics)'))->all();
+                    foreach ($usersArr as $user) {
+                        $users[] = $user->id;
+                    }
+                }
+                $query->andWhere(['added_by' => $users]);
             }
         }
-
         $countQuery = clone $query;
 
         $pages = new \yii\data\Pagination(['totalCount' => $countQuery->count()]);
@@ -340,7 +355,7 @@ class PatientController extends Controller
             $response = [
                 'success' => true,
                 'patients' => $find,
-                'pages' => $pages,
+                'pages' => $pages
             ];
         } else {
             $response = [

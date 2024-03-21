@@ -37,3 +37,10 @@ tests/_support/_generated
 
 /config/db.php
 .htaccess
+
+/assets
+!/assets/AdminAsset.php
+!/assets/AppAsset.php
+!/assets/BlankAsset.php
+!/assets/LoginAsset.php
+!/assets/AssessmentAsset.php

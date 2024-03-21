@@ -1628,15 +1628,41 @@ class CaseController extends Controller
                                 ];
                             }
                         } else {
-                            if (isset($POST['Cases']['skip']) && $POST['Cases']['skip'] == "Y") {
-                                $find->status = 3;
-                                $logTitle = "Action: Payment skipped as there is no payment due from patient.";
+                            if (\app\models\CaseServices::find()->where(['case_id' => $find->id, 'who_will_pay' => 0])->count() > 0) {
+                                $totalPayments = \app\models\Invoices::find()->where(['case_id' => $find->id, 'status' => 1, 'user_id' => $find->user_id])->count();
+                                $amountDue = \app\models\Invoices::find()->select(['sub_total'])->where(['case_id' => $find->id, 'status' => 0, 'user_id' => $find->user_id])->one();
+                                if ($totalPayments > 0 || ($amountDue && $amountDue->sub_total == 0)) {
+                                    $find->status = 3;
+                                    $logTitle = "Action: Payment accepted.";
+                                    if ($amountDue && $amountDue->sub_total == 0) {
+                                        $_POST = [];
+                                        $_POST['fields'] = [];
+                                        $_POST['fields']['case_id'] = $find->id;
+                                        $_POST['fields']['user_id'] = $find->user_id;
+                                        $_POST['fields']['amount'] = $amountDue->sub_total;
+                                        $_POST['fields']['mode'] = 6;
+                                        $_POST['fields']['manual'] = 1;
+                                        $response = $this->actionReceivePayment();
+                                    }
+                                } else {
+                                    return [
+                                        'error' => true,
+                                        'message' => 'Please make sure we received the payment from doctor.',
+                                        'skip' => false
+                                    ];
+                                }
                             } else {
-                                return [
-                                    'error' => true,
-                                    'message' => 'Please make sure we received the payment.',
-                                ];
+                                if (isset($POST['Cases']['skip']) && $POST['Cases']['skip'] == "Y") {
+                                    $find->status = 3;
+                                    $logTitle = "Action: Payment skipped as there is no payment due.";
+                                } else {
+                                    return [
+                                        'error' => true,
+                                        'message' => 'Please make sure we received the payment.',
+                                    ];
+                                }
                             }
+
                         }
                     } else if ($find->status == 3) {
                         $find->status = 4;

@@ -28,7 +28,7 @@ class CommonController extends Controller
         $behaviors = parent::behaviors();
         if ($_SERVER['REQUEST_METHOD'] != 'OPTIONS') {
             $behaviors['authenticator'] = [
-                'except' => ['get-banners', 'get-locations', 'contact-us','db-details'],
+                'except' => ['get-banners', 'get-locations', 'contact-us', 'db-details'],
                 'class' => CompositeAuth::className(),
                 'authMethods' => [
                     HttpBearerAuth::className(),
@@ -955,9 +955,11 @@ class CommonController extends Controller
         $model = new \app\models\Services;
         $query = $model->find()->joinWith(['locations'])->where(['services.parent_id' => 0]);
         if ($location != null) {
-            $query->joinWith(['child c' => function ($q) use ($location) {
-                $q->where(new \yii\db\Expression('FIND_IN_SET(' . $location . ',c.locations)'));
-            }]);
+            $query->joinWith([
+                'child c' => function ($q) use ($location) {
+                    $q->where(new \yii\db\Expression('FIND_IN_SET(' . $location . ',c.locations)'));
+                }
+            ]);
         } else {
             $query->joinWith(['child c']);
         }
@@ -1055,7 +1057,7 @@ class CommonController extends Controller
             } else {
                 $dates = [];
                 $today = date("Y-m-d");
-                $date =  date("Y-m-d", strtotime($date));
+                $date = date("Y-m-d", strtotime($date));
                 if ($today == $date) {
                     $dates[0] = $date;
                     $dates[1] = date('Y-m-d', strtotime('+1 day', strtotime($date)));
@@ -1121,7 +1123,7 @@ class CommonController extends Controller
                             }
                             $newSlots = $slots;
                             //Every Slot will check to every unavailable time
-                            foreach ($slots as $sKey=>$sVal) {
+                            foreach ($slots as $sKey => $sVal) {
                                 $not_available = false;
                                 foreach ($unavailable as $key => $blckd) {
                                     if ($blckd->full_day_off == 1) {
@@ -1137,7 +1139,7 @@ class CommonController extends Controller
                                         } */
                                         if ($sVal['from_time'] >= $blckd->from_time && $sVal['from_time'] < $blckd->to_time) {
                                             unset($newSlots[$sKey]);
-                                        } 
+                                        }
                                     }
                                 } //foreach end of blocked
 
@@ -1351,7 +1353,7 @@ class CommonController extends Controller
                 'users' => $query->asArray()->all(),
             ];
         } else {
-            if(!isset(Yii::$app->user->identity->clinics) || empty(Yii::$app->user->identity->clinics)){
+            if (!isset(Yii::$app->user->identity->clinics) || empty(Yii::$app->user->identity->clinics)) {
                 return [
                     'error' => true,
                     'message' => 'Please contact admin to assign clinic for your account to create case.',
@@ -1438,9 +1440,11 @@ class CommonController extends Controller
         if (isset($case_id) && !empty($case_id)) {
             try {
                 $model = new \app\models\TreatmentTeam;
-                $find = $model->find()->joinWith(["user" => function ($query) {
-                    $query->select('id, prefix,first_name,middle_name,last_name,suffix,username,email');
-                }])->where(['case_id' => $case_id])->asArray()->all();
+                $find = $model->find()->joinWith([
+                    "user" => function ($query) {
+                        $query->select('id, prefix,first_name,middle_name,last_name,suffix,username,email');
+                    }
+                ])->where(['case_id' => $case_id])->asArray()->all();
                 if ($find) {
                     return [
                         'success' => true,
@@ -1471,18 +1475,10 @@ class CommonController extends Controller
         try {
             $model = new \app\models\CaseServices;
             $find = $model->find()->joinWith(['service'])->where(['case_id' => $case_id])->asArray()->all();
-
-            if ($find) {
-                return [
-                    'success' => true,
-                    'services' => $find,
-                ];
-            } else {
-                return [
-                    'error' => true,
-                    'message' => 'Service not found!',
-                ];
-            }
+            return [
+                'success' => true,
+                'services' => $find,
+            ];
         } catch (\Exception $e) {
             return [
                 'error' => true,
@@ -1497,11 +1493,16 @@ class CommonController extends Controller
             if ($location_id !== null) {
                 $model = new \app\models\Invoices;
                 $caseStatusArr = [1, 2, 3, 4, 5, 6, 7, 8];
-                $find = $model->find()->joinWith(['case.services.service', 'case.patient', 'case.services' => function ($query) {
-                    $query->where(['who_will_pay' => 0]);
-                }, 'case.team' => function ($query) {
-                    $query->orderBy(['id' => SORT_ASC]);
-                }])->where(['cases.status' => $caseStatusArr, 'cases.location_id' => $location_id, 'invoices.patient_id' => null, 'invoices.status' => 0])->andWhere(['>', 'cases.doctor_balance', 0])->asArray()->all();
+                $find = $model->find()->joinWith([
+                    'case.services.service',
+                    'case.patient',
+                    'case.services' => function ($query) {
+                        $query->where(['who_will_pay' => 0]);
+                    },
+                    'case.team' => function ($query) {
+                        $query->orderBy(['id' => SORT_ASC]);
+                    }
+                ])->where(['cases.status' => $caseStatusArr, 'cases.location_id' => $location_id, 'invoices.patient_id' => null, 'invoices.status' => 0])->andWhere(['>', 'cases.doctor_balance', 0])->asArray()->all();
                 //$find = $model->find()->joinWith(['patient','services.service','services'=>function($query){$query->where(['who_will_pay'=>0]);}])->where(['user_id'=>Yii::$app->user->identity->id])->andWhere(['NOT IN','case_id',\app\models\Payments::find()->select('case_id')->where(['user_id'=>Yii::$app->user->identity->id])])->andWhere(['cases.status'=>5,'cases.location_id'=>$location_id])->asArray()->all();
                 //$find = $model->find()-> (['patient','services.service','services'=>function($query){$query->where(['who_will_pay'=>0])->andWhere(['NOT IN','case_id',\app\models\Payments::find()->select('case_id')]);}])->where(['user_id'=>Yii::$app->user->identity->id])->asArray()->all();
                 $payments = [];
@@ -1575,7 +1576,7 @@ class CommonController extends Controller
                 $response = $conn->processRequest("https://rhuat.bridgepaynetsecuretest.com/paymentservice/requesthandler.svc", $request);
                 //print_r($response);die;
                 $tmodel = new \app\models\Transactions;
-                $transactions['Transactions'] = (array)$response->responseMessage;
+                $transactions['Transactions'] = (array) $response->responseMessage;
                 $transactions['Transactions']['TransactionID'] = $response->TransactionID;
                 $transactions['Transactions']['RequestType'] = $response->RequestType;
                 $transactions['Transactions']['ResponseCode'] = $response->ResponseCode;
@@ -1594,14 +1595,14 @@ class CommonController extends Controller
                         $i = 0;
                         foreach ($find as $case) {
                             $maxId = \app\models\Invoices::find()->max("id") + 1;
-                            $imodel =  \app\models\Invoices::find()->where(['case_id' => $case->id])->one();
+                            $imodel = \app\models\Invoices::find()->where(['case_id' => $case->id])->one();
                             $model = new \app\models\Payments;
                             $model->case_id = $case->id;
                             $model->location_id = $case->location_id;
                             $model->invoice_id = $imodel->id;
                             $model->actual_invoice_id = $imodel->invoice_id;
                             $model->user_id = $imodel->user_id;
-                            $model->mode = (int)array_search($tmodel->CardType, $cardTypes);
+                            $model->mode = (int) array_search($tmodel->CardType, $cardTypes);
                             $model->manual = 0;
                             $model->paid_amount = $imodel->balance_amount;
                             $model->remaining_amount = 0;
@@ -1852,6 +1853,7 @@ class CommonController extends Controller
 
     public function actionDbDetails()
     {
-        echo "host: ".Yii::$app->db->dsn."<br/>username: ".Yii::$app->db->username."<br/>password: ".Yii::$app->db->password;die;
+        echo "host: " . Yii::$app->db->dsn . "<br/>username: " . Yii::$app->db->username . "<br/>password: " . Yii::$app->db->password;
+        die;
     }
 }
