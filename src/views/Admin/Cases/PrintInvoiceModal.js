@@ -349,9 +349,10 @@ class PrintInvoiceModal extends Component {
                                   ele.who_will_pay == 1 && (
                                     <tr key={index}>
                                       <td className="text-dark">
-                                        {moment(this.state.caseDetails.patient_checked_in).format(
-                                          "MM/DD/YYYY"
-                                        )}
+                                        {moment(
+                                          this.state.caseDetails
+                                            .patient_checked_in
+                                        ).format("MM/DD/YYYY")}
                                       </td>
                                       <td className="text-dark">
                                         {ele.service.name}
@@ -685,6 +686,16 @@ class PrintInvoiceModal extends Component {
                                     <strong> Invoice No: </strong>{" "}
                                     {ele.invoice_id}
                                   </td>
+                                  {this.state.caseDetails.patient_checked_in !==
+                                    null && (
+                                    <td className="text-dark">
+                                      <strong> Date of Services: </strong>
+                                      {moment(
+                                        this.state.caseDetails
+                                          .patient_checked_in
+                                      ).format("MM/DD/YYYY")}
+                                    </td>
+                                  )}
                                   <td className="text-dark">
                                     <strong> Invoice Total: </strong> $
                                     {ele.amount}

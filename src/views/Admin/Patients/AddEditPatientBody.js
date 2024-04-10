@@ -215,14 +215,8 @@ class AddEditPatientBody extends Component {
             alert("Save the note or cancel to discard");
           } else {
             this.setState({ submitted: true });
-            let fields = this.state.fields && JSON.parse(JSON.stringify(this.state.fields));
+            let fields = this.state.fields;
             fields["coustom_BirthDate"] = moment(fields["BirthDate"]).format(
-              "YYYY-MM-DD"
-            )
-            fields["email_consent_date"] = moment(fields["email_consent_date"]).format(
-              "YYYY-MM-DD"
-            )
-            fields["sms_consent_date"] = moment(fields["sms_consent_date"]).format(
               "YYYY-MM-DD"
             )
             const params = {
